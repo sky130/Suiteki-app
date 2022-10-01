@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_list"
+        android:title="Log文件操作">
+        <menu android:id="@+id/group_single">
+            <item
+                android:id="@+id/choose_log"
+                android:title="手动选择Log文件" />
+            <item
+                android:id="@+id/deleteFile"
+                android:title="删除Log文件" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/id_mode"
+        android:checkable="true"
+        android:title="兼容模式" />
+
+    <!--    <item-->
+    <!--        android:id="@+id/open_mode"-->
+    <!--        android:checkable="true"-->
+    <!--        android:checked="true"-->
+    <!--        android:title="权限提醒" />-->
+
+
+    <item
+        android:id="@+id/join_group"
+        android:title="进群吹水" />
+
+    <item
+        android:id="@+id/checkUpdate"
+        android:title="检查更新" />
+
+    <item
+        android:id="@+id/about"
+        android:title="关于应用" />
+
+
+</menu>

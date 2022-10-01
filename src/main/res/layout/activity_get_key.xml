@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:contentInsetStart="0dp"
+
+    android:orientation="vertical"
+    tools:context=".getKeyActivity">
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="301dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="AuthKey"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text=""
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="131dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="12dp"
+        android:drawableLeft="@drawable/key_new"
+        android:gravity="center_vertical"
+        android:onClick="getTheKey"
+        android:paddingLeft="15sp"
+        android:text="获取密钥"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="65dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="96dp"
+        android:text="复制"
+        android:onClick="copykey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="632dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="2dp"
+        android:divider="@null"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
