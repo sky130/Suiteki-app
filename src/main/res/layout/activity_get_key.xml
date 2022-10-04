@@ -10,7 +10,7 @@
     tools:context=".getKeyActivity">
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editText_get_key"
         android:layout_width="301dp"
         android:layout_height="56dp"
         android:layout_marginStart="50dp"
@@ -29,36 +29,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/button_get_key"
         android:layout_width="131dp"
         android:layout_height="55dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="12dp"
         android:drawableLeft="@drawable/key_new"
         android:gravity="center_vertical"
-        android:onClick="getTheKey"
+        android:onClick="onClick"
         android:paddingLeft="15sp"
         android:text="获取密钥"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintEnd_toStartOf="@+id/button_copy_key"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_get_key" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button_copy_key"
         android:layout_width="65dp"
         android:layout_height="55dp"
         android:layout_marginStart="19dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="96dp"
         android:text="复制"
-        android:onClick="copykey"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+        app:layout_constraintStart_toEndOf="@+id/button_get_key"
+        app:layout_constraintTop_toBottomOf="@+id/editText_get_key" />
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/listview_get_key"
         android:layout_width="match_parent"
         android:layout_height="632dp"
         android:layout_marginStart="2dp"
@@ -69,6 +69,6 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toBottomOf="@+id/button_get_key" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,6 @@
                 android:id="@+id/deleteFile"
                 android:title="删除Log文件" />
         </menu>
-
     </item>
 
     <item
@@ -21,12 +20,9 @@
         android:checkable="true"
         android:title="兼容模式" />
 
-    <!--    <item-->
-    <!--        android:id="@+id/open_mode"-->
-    <!--        android:checkable="true"-->
-    <!--        android:checked="true"-->
-    <!--        android:title="权限提醒" />-->
-
+    <item
+        android:id="@+id/copy_log"
+        android:title="查看日志" />
 
     <item
         android:id="@+id/join_group"
@@ -39,6 +35,5 @@
     <item
         android:id="@+id/about"
         android:title="关于应用" />
-
 
 </menu>

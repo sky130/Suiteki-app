@@ -11,8 +11,8 @@ android {
         applicationId "ml.sky233.suiteki"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.2.1-beta"
+        versionCode 9
+        versionName "1.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,19 +35,14 @@ android {
 }
 
 dependencies {
-    //implementation files('libs/E4ARuntime.jar')
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.documentfile:documentfile:1.0.1'
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    implementation files('libs\\Hitokoto.jar')
-    implementation files('libs\\json.jar')
-    implementation files('libs\\E4ARuntime.jar')
     testImplementation 'junit:junit:4.+'
     implementation("ml.sky233.suiteki:Suiteki:1.0.3")
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
 }
 

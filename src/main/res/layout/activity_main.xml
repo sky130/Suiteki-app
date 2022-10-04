@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/listview_main"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -30,18 +30,16 @@
         android:divider="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/cardView_main" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardView_main"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="27dp"
         android:clickable="true"
-        android:onClick="cardview"
+        android:onClick="onClick"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_marginEnd="55dp"
@@ -58,7 +56,7 @@
             android:background="@color/blue"
             />
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -66,7 +64,7 @@
             app:srcCompat="@drawable/key" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -79,7 +77,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="点击跳转"
