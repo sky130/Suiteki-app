@@ -6,22 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/key"
-        android:tint="@color/white"
-        android:visibility="invisible"
-        app:fabCustomSize="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ListView
-        android:id="@+id/listview_main"
+        android:id="@+id/main_listview"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -30,16 +16,17 @@
         android:divider="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView_main" />
+        app:layout_constraintTop_toBottomOf="@+id/main_cardView" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_main"
+        android:id="@+id/main_cardView"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="27dp"
-        android:clickable="true"
         android:onClick="onClick"
+        android:clickable="true"
+
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_marginEnd="55dp"
@@ -55,38 +42,41 @@
             android:layout_height="match_parent"
             android:background="@color/blue"
             />
+
         <ImageView
-            android:id="@+id/imageView_main"
+            android:id="@+id/main_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingLeft="26dp"
-            app:srcCompat="@drawable/key" />
+            android:paddingStart="26dp"
+            app:srcCompat="@drawable/ic_key_cardview"
+            tools:ignore="ContentDescription,RtlSymmetry" />
 
         <TextView
-            android:id="@+id/textView_title"
+            android:id="@+id/main_cardView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingLeft="79dp"
+            android:paddingStart="79dp"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="若汝无介意，愿作耳边墙。"
             android:textSize="18sp"
             android:paddingBottom="25dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@+id/textView_tag"
+            android:id="@+id/main_cardView_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="点击跳转"
+            android:text="@string/click_review"
             android:maxLines="1"
             android:singleLine="true"
             android:layout_gravity="center_vertical"
-            android:paddingLeft="79dp"
+            android:paddingStart="79dp"
             android:paddingTop="25dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            tools:ignore="RtlSymmetry" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

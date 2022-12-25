@@ -1,4 +1,58 @@
 <resources>
     <string name="app_name">Suiteki</string>
-    <string name="text">本应用尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务。本应用将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本应用不会将这些信息对外披露或向第三方提供。本应用会不时更新本隐私权政策。 您在同意本应用服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本应用服务使用协议不可分割的一部分。\n\n(A) 本应用不会向任何无关第三方提供、出售、出租、分享或交易您的个人信息，除非事先得到您的许可，或该第三方和本应用（含本应用关联公司）单独或共同为您提供服务，且在该服务结束后，其将被禁止访问包括其以前能够访问的所有这些资料。\n\n(B) 本应用亦不允许任何第三方以任何手段收集、编辑、出售或者无偿传播您的个人信息。任何本应用平台用户如从事上述活动，一经发现，本应用有权立即终止与该用户的服务协议。\n\n(C) 为服务用户的目的，本应用可能通过使用您的个人信息，向您提供您感兴趣的信息，包括但不限于向您发出产品和服务信息，或者与本应用合作伙伴共享信息以便他们向您发送有关其产品和服务的信息（后者需要您的事先同意）。\n\n1. 信息披露\n\n在如下情况下，本应用将依据您的个人意愿或法律的规定全部或部分的披露您的个人信息：\n\n(A) 根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；\n\n(B) 如您出现违反中国有关法律、法规或者本应用服务协议或相关规则的情况，需要向第三方披露；\n\n(C) 其它本应用根据法律、法规或者网站政策认为合适的披露。\n\n2. 信息安全\n\n本应用将会联网，但确保您的信息不丢失，不被滥用和变造，我们不会将您的信息发送到任何未经许可的服务器等其他地方。\n\n3. 权限说明\n\n(A) 读写权限，用于读取Log日志文件\n\n(B) 外部访问权限，同上，用于读取Log日志文件\n\n(C) 网络权限，用于访问互联网\n\n4. 本隐私政策的更改\n\n(A) 如果决定更改隐私政策，我们会在本政策中以及我们认为适当的位置发布这些更改，以便您了解我们如何收集、使用您的个人信息，哪些人可以访问这些信息，以及在什么情况下我们会透露这些信息。\n\n(B) 本应用保留随时修改本政策的权利，因此请经常查看。如对本政策作出重大更改，本应用会通过网站通知的形式告知。</string>
+    <string name="privacy_text">本应用尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务。本应用将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本应用不会将这些信息对外披露或向第三方提供。本应用会不时更新本隐私权政策。 您在同意本应用服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本应用服务使用协议不可分割的一部分。\n\nA) 本应用不会向任何无关第三方提供、出售、出租、分享或交易您的个人信息，仅在本地保存您的账号密码数据。\n\nB) 本应用亦不允许任何第三方以任何手段收集、编辑、出售或者无偿传播您的个人信息。任何本应用平台用户如从事上述活动，一经发现，本应用有权立即终止与该用户的服务协议。\n\n为服务用户的目的，本应用可能通过使用您的个人信息，向您提供您感兴趣的信息，包括但不限于向您发出产品和服务信息，或者与本应用合作伙伴共享信息以便他们向您发送有关其产品和服务的信息（后者需要您的事先同意）。\n\n1. 信息披露\n\n在如下情况下，本应用将依据您的个人意愿或法律的规定全部或部分的披露您的个人信息：\n\nA) 根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；\n\nB) 如您出现违反中国有关法律、法规或者本应用服务协议或相关规则的情况，需要向第三方披露；\n\n其它本应用根据法律、法规或者网站政策认为合适的披露。\n\n2. 信息安全\n\n本应用将会联网，但确保您的信息不丢失，不被滥用和变造，我们不会将您的信息发送到任何未经许可的服务器等其他地方。\n\n3. 权限说明\n\nA) 读写权限，用于读取Log日志文件\n\nB) 外部访问权限，同上，用于读取Log日志文件\n\n网络权限，用于访问互联网\n\n4. 本隐私政策的更改\n\nA) 如果决定更改隐私政策，我们会在本政策中以及我们认为适当的位置发布这些更改，以便您了解我们如何收集、使用您的个人信息，哪些人可以访问这些信息，以及在什么情况下我们会透露这些信息。\n\nB) 本应用保留随时修改本政策的权利，因此请经常查看。如对本政策作出重大更改，本应用会通过网站通知的形式告知。</string>
+    <string name="app_introduce">小米手环密钥获取工具</string>
+    <string name="login_error">邮箱或密码错误</string>
+    <string name="url_language">zh_CN</string>
+    <string name="not_found_file">未发现AuthKey,请尝试结束运行并再次打开小米运动健康或小米穿戴</string>
+    <string name="not_found_net">未发现设备,请检查账号是否有绑定设备</string>
+
+    <!--MainActivity CardView-->
+    <string name="click_review">点击刷新</string>
+    <string name="click_get_permission">点击获取</string>
+    <string name="permission_data">Data权限未获取</string>
+    <string name="permission_file">读写权限未获取</string>
+    <string name="permission_all">读写权限等未获取</string>
+
+    <!--MainActivity Menu-->
+    <string name="check_log">查看日志</string>
+    <string name="join_group">进群吹水</string>
+    <string name="app_settings">应用设置</string>
+    <string name="check_update">检查更新</string>
+    <string name="app_about">关于应用</string>
+
+    <!--GetKeyActivity-->
+    <string name="get_key_title">获取密钥</string>
+
+    <!--LoginActivity-->
+    <string name="login_title">登陆账号</string>
+    <string name="email_address">邮箱地址</string>
+    <string name="user_password">邮箱密码</string>
+    <string name="login_button">登陆</string>
+    <string name="mi_login">小米账号登录</string>
+    <string name="save_user_check_box">保存账号密码</string>
+
+    <!--WebActivity-->
+    <string name="web_title">小米账号登录</string>
+
+    <!--AboutActivity-->
+    <string name="about_app">关于应用</string>
+
+    <!--SettingsActivity-->
+    <string name="title_activity_settings">应用设置</string>
+
+    <!-- Preference Titles -->
+    <string name="read_mode">读写模式</string>
+    <string name="read_app">默认应用</string>
+    <string name="app_mode">兼容模式</string>
+    <string name="other_setting">其他设置</string>
+    <string name="app_update">打开应用时提示更新</string>
+    <string name="no_tip_title">关闭权限提醒</string>
+
+    <!-- Messages Preferences -->
+    <string name="android11_start">在Android11以上必须开启</string>
+    <string name="all_about_off">支持全系Android\nAndroid13可尝试打开该选项</string>
+    <string name="all_about_on">支持全系Android\n需要进入小米运动健康关于页\n连点Logo,直到提示迁移Log文件\n点击确定即可</string>
+    <string name="no_tip">当用不上文件读写权限时可以开启</string>
+
 </resources>

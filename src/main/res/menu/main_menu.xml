@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item-->
+<!--        android:id="@+id/check_log"-->
+<!--        android:title="@string/check_log" />-->
+    <item
+        android:id="@+id/app_settings"
+        android:title="@string/app_settings" />
+    <item
+        android:id="@+id/check_update"
+        android:title="@string/check_update" />
+    <item
+        android:id="@+id/join_group"
+        android:title="@string/join_group" />
+    <item
+        android:id="@+id/app_about"
+        android:title="@string/app_about" />
+</menu>

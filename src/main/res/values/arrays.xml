@@ -1,0 +1,50 @@
+<resources>
+    <string-array name="app_mode_entries">
+        <item>自动选择</item>
+        <item>小米运动健康</item>
+        <item>小米穿戴</item>
+    </string-array>
+
+    <string-array name="app_mode_values">
+        <item>auto</item>
+        <item>mi_health</item>
+        <item>mi_wearable</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <string-array name="developers">
+        <item>Sky233</item>
+        <item>月下鱼猫</item>
+        <item>一個小果冻</item>
+        <item>王小辰</item>
+        <item>Sh1n3zZ</item>
+        <item>Suiteki-Lib</item>
+        <item>Huami-token</item>
+        <item>OkHttp</item>
+        <item>隐私政策</item>
+        <item>源代码开源许可</item>
+    </string-array>
+
+    <string-array name="title">
+        <item>开发者 | 图标设计 | UI设计</item>
+        <item>宣传图设计 | 酷安代理上架</item>
+        <item>文字设计 | 小吉祥物</item>
+        <item>关于页设计</item>
+        <item>提供网盘支持</item>
+        <item>一个可以获取小米手环的AuthKey的类库ヾ(≧▽≦*)o</item>
+        <item>Script to obtain watch or band bluetooth token from Huami servers</item>
+        <item>Square’s meticulous HTTP client for the JVM, Android, and GraalVM.</item>
+        <item>已经阅读并同意</item>
+        <item>Apache-2.0 license</item>
+    </string-array>
+
+</resources>
