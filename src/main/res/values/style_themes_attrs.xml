@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="color_text_about" format="color" />
-    <attr name="color_bg_about" format="color" />
-</resources>
