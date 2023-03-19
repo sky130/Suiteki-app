@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">米环助手</string>
+    <string name="title_activity_main_test">1</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="menu_title_home">主页</string>
+    <string name="menu_title_device">设备</string>
+    <string name="title_device">设备</string>
+    <string name="title_device_manager">设备管理</string>
+    <string name="title_install">自定义安装</string>
+    <string name="title_graph_loading">加载中</string>
+    <string name="title_app_help">应用帮助</string>
+    <string name="title_add_device">添加设备</string>
+</resources>

@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Suiteki" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue_2</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue_2</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black_2</item>
+        <item name="exb_itemInactiveColor">@color/blue_2</item>
+        <item name="exb_backgroundColor">@color/black_3</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.Suiteki.Dialog" >
+        <item name="android:background">@drawable/bg_dialog_night</item>
+    </style>
+</resources>
