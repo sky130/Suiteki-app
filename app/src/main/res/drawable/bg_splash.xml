@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:drawable="@color/blue" />
+
+    <item
+        android:drawable="@drawable/ic_suiteki"
+        android:height="125dp"
+        android:width="89.28dp"
+        android:gravity="center"
+        tools:ignore="UnusedAttribute" />
+
+</layer-list>

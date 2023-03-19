@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item>
+        <shape>
+            <solid android:color="#ABBEF9" />
+            <corners android:radius="1000000dp" />
+        </shape>
+    </item>
+    <item>
+        <inset
+            android:layout_width="wrap_content"
+            android:insetLeft="7dp"
+            android:insetTop="7dp"
+            android:insetRight="7dp"
+            android:insetBottom="7dp">
+            <shape>
+                <solid android:color="@color/blue" />
+                <corners android:radius="1000000dp" />
+            </shape>
+        </inset>
+    </item>
+</layer-list>
+
