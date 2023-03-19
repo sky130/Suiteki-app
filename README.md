@@ -3,19 +3,11 @@
 ---
 ## 介绍
 
-> 小米手环密钥获取工具
+> 小米手环蓝牙安装工具
 > 基于[Suiteki-Lib](https://github.com/sky130/Suiteki/)开发
 
-![](/app.jpg)
-
 ---
 
-## 优点
-- 支持在手机端**一键**获取密钥
-- 支持多款官方应用 **ZeppLife** , **小米运动健康** , **小米穿戴**
-- 支持获取**多个手环**密钥
+> 目前仓库所有内容均为试验
 
----
-## 下载
-[CoolApk酷安](https://www.coolapk.com/apk/ml.sky233.suiteki)
 
