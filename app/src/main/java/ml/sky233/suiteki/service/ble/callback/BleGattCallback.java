@@ -16,21 +16,19 @@ import java.nio.ByteBuffer;
 import java.util.Random;
 
 import ml.sky233.suiteki.MainApplication;
-import ml.sky233.suiteki.callback.BleNotifyServiceCallback;
 import ml.sky233.suiteki.callback.ReAuthCallback;
 import ml.sky233.suiteki.service.ble.BleActions;
-import ml.sky233.suiteki.service.ble.BleNotifyService;
 import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.service.ble.HuamiService;
 import ml.sky233.suiteki.util.ArrayUtils;
 import ml.sky233.suiteki.util.BleLogTools;
 import ml.sky233.suiteki.util.BytesUtils;
-import ml.sky233.suiteki.util.Crypto.CryptoUtils;
-import ml.sky233.suiteki.util.Crypto.ECDH_B163;
-import ml.sky233.suiteki.util.MsgUtils;
+import ml.sky233.suiteki.util.CryptoUtils;
+import ml.sky233.suiteki.util.ECDH_B163;
+import ml.sky233.suiteki.util.MsgBuilder;
 
 @SuppressLint("MissingPermission")
-public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback implements BleNotifyServiceCallback {
+public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     Handler handler;
     BluetoothGatt mGatt;
     public BleDevice bleDevice;
@@ -50,7 +48,6 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback im
     ByteBuffer reassemblyBuffer;
     Context context;
     ReAuthCallback callback;
-    BleNotifyService bleNotifyService;
 
 
     public BleGattCallback(Handler handler, Context context, String authKey) {
@@ -72,14 +69,24 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback im
     @Override
     public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt bluetoothGatt, int i) {
         setStatus(HuamiService.STATUS_BLE_CONNECTED);
-        this.mGatt = bluetoothGatt;
-        this.bleNotifyService = new BleNotifyService(bleDevice, context);
+        mGatt = bluetoothGatt;
         this.bleDevice = bleDevice;
-
-        bleNotifyService.addUUID(HuamiService.UUID_SERVICE_MIBAND_SERVICE,HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY);
-//        bleNotifyService.addUUID(HuamiService.UUID_SERVICE_FIRMWARE,HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY);
-        bleNotifyService.notifyBle(this);
-
+        new Thread(() -> {
+            BleManager.getInstance().notify(bleDevice,
+                    HuamiService.UUID_SERVICE_MIBAND_SERVICE.toString(),
+                    HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY.toString(),
+                    new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY));
+            BleManager.getInstance().notify(bleDevice,
+                    HuamiService.UUID_SERVICE_FIRMWARE.toString(),
+                    HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY.toString(),
+                    new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            doPerform();
+        }).start();
 
     }
 
@@ -106,7 +113,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback im
     }
 
     public void setStatus(int status) {
-        handler.sendMessage(MsgUtils.build(status, 1));
+        handler.sendMessage(MsgBuilder.build(status, 1));
     }
 
     public void doPerform() {
@@ -354,13 +361,4 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback im
         }
     }
 
-    @Override
-    public void onNotifySuccess() {
-        doPerform();
-    }
-
-    @Override
-    public void onNotifyFailure() {
-
-    }
 }
