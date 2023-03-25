@@ -36,7 +36,7 @@
             android:includeFontPadding="false"
             android:text="@string/title_install"
             android:textColor="@color/blue"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
-            android:textSize="27sp"
+            android:textSize="23sp"
             android:textColor="@color/blue"
             android:text="准备安装"
             android:textStyle="bold" />
@@ -78,9 +78,9 @@
             android:id="@+id/progress_int"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="1dp"
             android:gravity="center_horizontal"
-            android:textSize="25sp"
+            android:textSize="23sp"
             android:textColor="@color/blue"
             android:text="0%"
             android:textStyle="bold" />
