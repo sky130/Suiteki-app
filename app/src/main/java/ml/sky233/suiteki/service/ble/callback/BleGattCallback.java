@@ -18,6 +18,7 @@ import java.util.Random;
 import ml.sky233.suiteki.MainApplication;
 import ml.sky233.suiteki.callback.ReAuthCallback;
 import ml.sky233.suiteki.service.ble.BleActions;
+import ml.sky233.suiteki.service.ble.BleDeviceInfo;
 import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.service.ble.HuamiService;
 import ml.sky233.suiteki.util.ArrayUtils;
@@ -240,6 +241,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
             BleService.setStatus(HuamiService.STATUS_BLE_AUTHED);
             BleService.setStatus(HuamiService.STATUS_BLE_CONNECTED);
             BleService.setStatus(HuamiService.STATUS_BLE_NORMAL);
+            new BleDeviceInfo(bleDevice) ;
             return;
         } else {
             return;

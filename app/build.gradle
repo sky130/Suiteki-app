@@ -10,8 +10,8 @@ android {
         applicationId "ml.sky233.suiteki"
         minSdk 23
         targetSdk 33
-        versionCode 24
-        versionName "2.0.0-Alpha-1"
+        versionCode 25
+        versionName "2.0.0-Alpha-2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -129,7 +129,7 @@ public class FileUtils {
         String res = "";
         InputStream inputStream = null;
         try {
-            inputStream = context.getContentResolver().openInputStream(chooseUri(context));
+            inputStream = context.getContentResolver().openInputStream(uri);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
