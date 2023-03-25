@@ -32,7 +32,7 @@
  */
 
 
-package ml.sky233.suiteki.util;
+package ml.sky233.suiteki.util.Crypto;
 
 public class ECDH_B163 {
 

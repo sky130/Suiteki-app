@@ -17,10 +17,9 @@ import java.util.ArrayList;
 
 import ml.sky233.suiteki.MainApplication;
 import ml.sky233.suiteki.callback.ProgressCallback;
-import ml.sky233.suiteki.callback.ReAuthCallback;
 import ml.sky233.suiteki.util.BleLogTools;
 import ml.sky233.suiteki.util.BytesUtils;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.MsgUtils;
 
 @SuppressLint("MissingPermission")
 public class FirmwareInstaller {
@@ -76,7 +75,7 @@ public class FirmwareInstaller {
     }
 
     public void setStatus(int status) {
-        handler.sendMessage(MsgBuilder.build(status, 1));
+        handler.sendMessage(MsgUtils.build(status, 1));
     }
 
     public void writeFirmware(byte[] bytes) {

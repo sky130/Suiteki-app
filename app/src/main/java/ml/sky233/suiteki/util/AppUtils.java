@@ -84,10 +84,10 @@ public class AppUtils {
             if (file.isFile())
                 if ("app".equals(getType(getFileText(path)))) {
                     appList.addAppInfo(new AppInfo(path));
-                    handler.sendMessage(MsgBuilder.build("添加成功", 0));
-                    handler.sendMessage(MsgBuilder.build("", 1));
+                    handler.sendMessage(MsgUtils.build("添加成功", 0));
+                    handler.sendMessage(MsgUtils.build("", 1));
                 } else {
-                    handler.sendMessage(MsgBuilder.build("添加失败", 0));
+                    handler.sendMessage(MsgUtils.build("添加失败", 0));
                 }
             FileUtils.deleteDirWihtFile(data_path + "/log_data/");
         }

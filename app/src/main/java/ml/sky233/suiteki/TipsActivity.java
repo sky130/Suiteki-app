@@ -15,14 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import ml.sky233.suiteki.R;
-import ml.sky233.suiteki.adapter.AppAdapter;
-import ml.sky233.suiteki.adapter.SuiteGraphAdapter;
 import ml.sky233.suiteki.adapter.TipsAdapter;
-import ml.sky233.suiteki.bean.AppObject;
 import ml.sky233.suiteki.bean.TipsObject;
-import ml.sky233.suiteki.util.EsonUtils;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.Eson.EsonUtils;
+import ml.sky233.suiteki.util.MsgUtils;
 import ml.sky233.suiteki.util.ViewUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -50,9 +46,9 @@ public class TipsActivity extends AppCompatActivity {
             try {
                 Response response = okClient.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    handler.sendMessage(MsgBuilder.build(Objects.requireNonNull(response.body()).string(), 0));
+                    handler.sendMessage(MsgUtils.build(Objects.requireNonNull(response.body()).string(), 0));
                 } else
-                    handler.sendMessage(MsgBuilder.build("", 1));
+                    handler.sendMessage(MsgUtils.build("", 1));
             } catch (IOException e) {
                 e.printStackTrace();
             }

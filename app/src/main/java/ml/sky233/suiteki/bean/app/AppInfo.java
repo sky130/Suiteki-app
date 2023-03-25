@@ -1,6 +1,6 @@
 package ml.sky233.suiteki.bean.app;
 
-import ml.sky233.suiteki.util.EsonUtils;
+import ml.sky233.suiteki.util.Eson.EsonUtils;
 import ml.sky233.suiteki.util.FileUtils;
 
 public class AppInfo {

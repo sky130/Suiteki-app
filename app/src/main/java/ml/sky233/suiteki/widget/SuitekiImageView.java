@@ -9,16 +9,14 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import ml.sky233.suiteki.R;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.MsgUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -49,12 +47,12 @@ public class SuitekiImageView extends ImageView {
             Request request = new Request.Builder().url(url).build();
             okHttpClient.newCall(request).enqueue(new Callback() {
                 public void onFailure(Call call, IOException e) {
-                    handler.sendMessage(MsgBuilder.build("", 1));
+                    handler.sendMessage(MsgUtils.build("", 1));
                 }
 
                 public void onResponse(Call call, Response response) throws IOException {
                     byte[] bytes = response.body().bytes();
-                    handler.sendMessage(MsgBuilder.build(BitmapFactory.decodeByteArray(bytes, 0, bytes.length), 0));
+                    handler.sendMessage(MsgUtils.build(BitmapFactory.decodeByteArray(bytes, 0, bytes.length), 0));
                 }
             });
         }).start();

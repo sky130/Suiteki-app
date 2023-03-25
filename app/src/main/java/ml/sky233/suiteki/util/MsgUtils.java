@@ -2,7 +2,7 @@ package ml.sky233.suiteki.util;
 
 import android.os.Message;
 
-public class MsgBuilder {
+public class MsgUtils {
 
     public static Message build(Object obj,int what){
         Message msg = Message.obtain();

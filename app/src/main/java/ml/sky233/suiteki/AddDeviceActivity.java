@@ -38,7 +38,7 @@ import ml.sky233.suiteki.bean.AppObject;
 import ml.sky233.suiteki.bean.device.DeviceInfo;
 import ml.sky233.suiteki.bean.device.DevicesList;
 import ml.sky233.suiteki.util.FileUtils;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.MsgUtils;
 import ml.sky233.suiteki.util.TextUtils;
 import ml.sky233.suiteki.util.ViewUtils;
 import ml.sky233.suiteki.widget.SuitekiCardButton;
@@ -145,7 +145,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         MainApplication.devicesList.saveData();
                         Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
                     });
-                    handler.sendMessage(MsgBuilder.build(adapter, 0));
+                    handler.sendMessage(MsgUtils.build(adapter, 0));
                 }
             }).start();
         else
@@ -168,7 +168,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         MainApplication.devicesList.saveData();
                         Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
                     });
-                    handler.sendMessage(MsgBuilder.build(adapter, 0));
+                    handler.sendMessage(MsgUtils.build(adapter, 0));
                 }
             }).start();
 
@@ -223,10 +223,10 @@ public class AddDeviceActivity extends AppCompatActivity {
                         MainApplication.devicesList.saveData();
                         Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
                     });
-                    handler.sendMessage(MsgBuilder.build(adapter, 0));
+                    handler.sendMessage(MsgUtils.build(adapter, 0));
                     //登录成功
                 } else {
-                    handler.sendMessage(MsgBuilder.build("", 1));
+                    handler.sendMessage(MsgUtils.build("", 1));
                     //登录失败
                 }
             }).start();
@@ -291,10 +291,10 @@ public class AddDeviceActivity extends AppCompatActivity {
                             MainApplication.devicesList.saveData();
                             Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
                         });
-                        handler.sendMessage(MsgBuilder.build(adapter, 0));
+                        handler.sendMessage(MsgUtils.build(adapter, 0));
                         //登录成功
                     } else {
-                        handler.sendMessage(MsgBuilder.build("", 1));
+                        handler.sendMessage(MsgUtils.build("", 1));
                         //登录失败
                     }
                 }).start();

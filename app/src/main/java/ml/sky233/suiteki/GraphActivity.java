@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import ml.sky233.suiteki.callback.GraphCallback;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.MsgUtils;
 import ml.sky233.suiteki.util.ViewUtils;
 import ml.sky233.suiteki.widget.SuiteGraphView;
 import okhttp3.OkHttpClient;
@@ -51,7 +51,7 @@ public class GraphActivity extends AppCompatActivity implements GraphCallback {
             try {
                 Response response = okClient.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    handler.sendMessage(MsgBuilder.build(Objects.requireNonNull(response.body()).string(), 0));
+                    handler.sendMessage(MsgUtils.build(Objects.requireNonNull(response.body()).string(), 0));
                 }
             } catch (IOException e) {
                 e.printStackTrace();

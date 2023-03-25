@@ -1,7 +1,6 @@
 package ml.sky233.suiteki;
 
 import static ml.sky233.suiteki.MainApplication.devicesList;
-import static ml.sky233.suiteki.MainApplication.suiteki;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,17 +16,10 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import ml.sky233.SuitekiObject;
-import ml.sky233.SuitekiUtils;
 import ml.sky233.suiteki.adapter.DeviceAdapter;
 import ml.sky233.suiteki.bean.device.DeviceInfo;
-import ml.sky233.suiteki.bean.device.DevicesList;
-import ml.sky233.suiteki.util.MsgBuilder;
-import ml.sky233.suiteki.util.TextUtils;
+import ml.sky233.suiteki.util.MsgUtils;
 import ml.sky233.suiteki.util.ViewUtils;
 import ml.sky233.suiteki.widget.SuitekiCardButton;
 
@@ -43,7 +35,7 @@ public class DeviceActivity extends AppCompatActivity {
         View back = findViewById(R.id.title_device_back);
         ViewUtils.addTouchScale(back);
         back.setOnClickListener((v) -> {
-            MainApplication.handler.sendMessage(MsgBuilder.build("", 1));
+            MainApplication.handler.sendMessage(MsgUtils.build("", 1));
             DeviceActivity.this.finish();
         });
         View add = findViewById(R.id.title_device_add);
@@ -64,7 +56,7 @@ public class DeviceActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        MainApplication.handler.sendMessage(MsgBuilder.build("", 1));
+        MainApplication.handler.sendMessage(MsgUtils.build("", 1));
         super.onBackPressed();
     }
 

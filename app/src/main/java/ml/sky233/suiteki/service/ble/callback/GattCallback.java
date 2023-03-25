@@ -25,9 +25,9 @@ import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.util.ArrayUtils;
 import ml.sky233.suiteki.util.BleLogTools;
 import ml.sky233.suiteki.util.BytesUtils;
-import ml.sky233.suiteki.util.CryptoUtils;
-import ml.sky233.suiteki.util.ECDH_B163;
-import ml.sky233.suiteki.util.MsgBuilder;
+import ml.sky233.suiteki.util.Crypto.CryptoUtils;
+import ml.sky233.suiteki.util.Crypto.ECDH_B163;
+import ml.sky233.suiteki.util.MsgUtils;
 import ml.sky233.suiteki.service.ble.HuamiService;
 
 @SuppressLint("MissingPermission")
@@ -140,7 +140,7 @@ public class GattCallback extends BluetoothGattCallback {
 //                throw new RuntimeException(e);
 //            }
 
-            handler.sendMessage(MsgBuilder.build(1));
+            handler.sendMessage(MsgUtils.build(1));
         }
 
     }

@@ -2,35 +2,29 @@ package ml.sky233.suiteki.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import ml.sky233.suiteki.InstallActivity;
-import ml.sky233.suiteki.R;
 import ml.sky233.suiteki.adapter.WatchFaceAdapter;
 import ml.sky233.suiteki.bean.WatchFaceObject;
 import ml.sky233.suiteki.databinding.FragmentHomeBinding;
-import ml.sky233.suiteki.util.EsonUtils;
-import ml.sky233.suiteki.util.FileUtils;
-import ml.sky233.suiteki.util.MsgBuilder;
-import ml.sky233.suiteki.widget.SuitekiImageView;
+import ml.sky233.suiteki.util.Eson.EsonUtils;
+import ml.sky233.suiteki.util.MsgUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -54,7 +48,7 @@ public class HomeFragment extends Fragment {
             try {
                 Response response = okClient.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    handler.sendMessage(MsgBuilder.build(Objects.requireNonNull(response.body()).string(), 0));
+                    handler.sendMessage(MsgUtils.build(Objects.requireNonNull(response.body()).string(), 0));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -95,7 +89,7 @@ public class HomeFragment extends Fragment {
                             ResponseBody body = response.body();
                             try {
                                 byte[] bytes = body.bytes();
-                                handler.sendMessage(MsgBuilder.build(bytes, 1));
+                                handler.sendMessage(MsgUtils.build(bytes, 1));
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }

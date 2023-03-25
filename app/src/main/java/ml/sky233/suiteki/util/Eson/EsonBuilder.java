@@ -1,4 +1,4 @@
-package ml.sky233.suiteki.util;
+package ml.sky233.suiteki.util.Eson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
