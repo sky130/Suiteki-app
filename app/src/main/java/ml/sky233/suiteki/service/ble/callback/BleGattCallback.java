@@ -81,7 +81,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                     HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY.toString(),
                     new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY));
             try {
-                Thread.sleep(1000);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -355,7 +355,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                     }
                 });
         try {
-            Thread.sleep(50);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
