@@ -43,7 +43,7 @@ public class TipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @NonNull
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup vg, int viewType) {
         // 根据布局文件item_linear.xml生成视图对象
-        View v = LayoutInflater.from(mContext).inflate(R.layout.list_item_app, vg, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.list_item_app_blue, vg, false);
         return new ItemHolder(v);
     }
 

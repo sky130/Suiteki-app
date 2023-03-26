@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_window"
+
     tools:context=".InstallActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
+        style="@style/Theme.Suiteki.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"
@@ -69,9 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
-            android:textSize="23sp"
-            android:textColor="@color/blue"
             android:text="准备安装"
+            android:textColor="@color/blue"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,19 +81,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:gravity="center_horizontal"
-            android:textSize="23sp"
-            android:textColor="@color/blue"
             android:text="0%"
+            android:textColor="@color/blue"
+            android:textSize="23sp"
             android:textStyle="bold" />
     </LinearLayout>
-<!--    <ml.sky233.suiteki.widget.SuitekiButton-->
-<!--        style="@style/Theme.Suiteki.Button"-->
-<!--        android:id="@+id/install_button"-->
-<!--        android:layout_marginStart="65dp"-->
-<!--        android:layout_marginEnd="65dp"-->
-<!--        android:layout_marginBottom="40dp"-->
-<!--        android:text="选择文件"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <!--    <ml.sky233.suiteki.widget.SuitekiButton-->
+    <!--        style="@style/Theme.Suiteki.Button"-->
+    <!--        android:id="@+id/install_button"-->
+    <!--        android:layout_marginStart="65dp"-->
+    <!--        android:layout_marginEnd="65dp"-->
+    <!--        android:layout_marginBottom="40dp"-->
+    <!--        android:text="选择文件"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

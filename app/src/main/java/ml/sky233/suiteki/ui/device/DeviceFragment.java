@@ -56,7 +56,7 @@ public class DeviceFragment extends Fragment implements StatusCallback {
         ArrayList<AppObject> arrayList = new ArrayList<>();
         arrayList.add(new AppObject("自定义安装", R.drawable.ic_app_install));
         arrayList.add(new AppObject("使用帮助", R.drawable.ic_app_help));
-        arrayList.add(new AppObject("应用设置", R.drawable.ic_app_setting));
+        arrayList.add(new AppObject("应用设置(未开放)", R.drawable.ic_app_setting));
 
         AppAdapter adapter = new AppAdapter(getContext(), arrayList);
         adapter.setOnItemClickListener((v, i) -> {

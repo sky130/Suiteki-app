@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,6 @@ public class MainTestActivity extends AppCompatActivity {
         binding = ActivityMainTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED && Build.VERSION.SDK_INT >= 31)
             ActivityCompat.requestPermissions(MainTestActivity.this, new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT}, 1);
         ExpandableBottomBar bar = findViewById(R.id.expandable_bottom_bar);
@@ -60,9 +60,11 @@ public class MainTestActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         bar.getMenu().select(R.id.navigation_home);
+                        binding.container.setBackgroundResource(R.drawable.bg_window);
                         break;
                     case 1:
                         bar.getMenu().select(R.id.navigation_dashboard);
+                        binding.container.setBackgroundResource(R.drawable.bg_window_pink);
                         break;
                 }
             }
@@ -75,8 +77,10 @@ public class MainTestActivity extends AppCompatActivity {
         bar.setOnItemSelectedListener((view, menuItem, aBoolean) -> {
             if (menuItem.getId() == R.id.navigation_home) {
                 viewPager.setCurrentItem(0);
+                binding.container.setBackgroundResource(R.drawable.bg_window);
             } else if (menuItem.getId() == R.id.navigation_dashboard) {
                 viewPager.setCurrentItem(1);
+                binding.container.setBackgroundResource(R.drawable.bg_window_pink);
             }
             return null;
         });

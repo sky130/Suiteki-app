@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_device);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (this.getApplicationContext().getResources().getConfiguration().uiMode != 0x21)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         View back = findViewById(R.id.title_add_device_back);
@@ -182,11 +184,11 @@ public class AddDeviceActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 0:
                     progressBar.setVisibility(View.INVISIBLE);
-                    recyclerView.setAdapter((RecyclerView.Adapter) msg.obj);
+                    recyclerView.setAdapter((DeviceAdapter) msg.obj);
                     break;
                 case 1://登录失败
                     progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(AddDeviceActivity.this, "登录失败,检查账号密码或网络环境", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddDeviceActivity.this, "登录失败,检查账号密码", Toast.LENGTH_SHORT).show();
                     break;
 
             }

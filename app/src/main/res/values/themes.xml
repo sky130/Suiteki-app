@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/blue_2</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/blue_s</item>
         <item name="exb_itemInactiveColor">@color/blue_2</item>
         <!-- Customize your theme here. -->
     </style>
@@ -58,5 +58,14 @@
 
     <style name="Theme.Suiteki.Dialog" >
         <item name="android:background">@drawable/bg_dialog</item>
+    </style>
+
+    <style name="Theme.Suiteki.Title" >
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginTop">45dp</item>
     </style>
 </resources>
