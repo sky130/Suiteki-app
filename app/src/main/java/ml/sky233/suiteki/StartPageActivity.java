@@ -18,6 +18,7 @@ public class StartPageActivity extends AppCompatActivity {
             try {
                 sleep(200);
                 startActivity(new Intent(StartPageActivity.this, MainTestActivity.class));
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 finish();//关闭当前活动
             } catch (Exception e) {
                 e.printStackTrace();
@@ -25,5 +26,11 @@ public class StartPageActivity extends AppCompatActivity {
         }).start();
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
 }
+
+

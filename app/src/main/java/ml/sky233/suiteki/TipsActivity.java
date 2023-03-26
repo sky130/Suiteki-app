@@ -72,6 +72,7 @@ public class TipsActivity extends AppCompatActivity {
                     adapter.setOnItemClickListener((v, i) -> {
                         GraphActivity.setGraphUrl(list.get(i).url);
                         TipsActivity.this.startActivity(new Intent(TipsActivity.this, GraphActivity.class));
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     });
                     recyclerView.setAdapter(adapter);
                     break;
@@ -81,4 +82,10 @@ public class TipsActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
 }

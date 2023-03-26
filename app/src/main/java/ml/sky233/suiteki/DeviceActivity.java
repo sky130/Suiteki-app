@@ -44,6 +44,7 @@ public class DeviceActivity extends AppCompatActivity {
         ViewUtils.addTouchScale(add);
         add.setOnClickListener((v) -> {
             startActivity(new Intent(this, AddDeviceActivity.class));
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
         recycler = findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -99,4 +100,11 @@ public class DeviceActivity extends AppCompatActivity {
             d.dismiss();
         });
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
+
 }

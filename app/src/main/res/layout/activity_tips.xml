@@ -9,7 +9,7 @@
     tools:context=".TipsActivity">
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/Theme.Suiteki.Title"
+        style="@style/Theme.Suiteki.Title.Back"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"

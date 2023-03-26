@@ -52,6 +52,7 @@ public class DeviceFragment extends Fragment implements StatusCallback {
 
         binding.deviceChange.setOnClickListener((v) -> {
             getActivity().startActivity(new Intent(getActivity(), DeviceActivity.class));
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
         ArrayList<AppObject> arrayList = new ArrayList<>();
         arrayList.add(new AppObject("自定义安装", R.drawable.ic_app_install));
@@ -70,6 +71,8 @@ public class DeviceFragment extends Fragment implements StatusCallback {
                     break;
                 case 1:
                     startActivity(new Intent(getContext(), TipsActivity.class));
+                    getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
                     break;
             }
         });
@@ -88,6 +91,8 @@ public class DeviceFragment extends Fragment implements StatusCallback {
             try {
                 InstallActivity.setInputStream(requireContext().getContentResolver().openInputStream(Objects.requireNonNull(df).getUri()));
                 startActivity(new Intent(getContext(), InstallActivity.class));
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 StringWriter stringWriter = new StringWriter();

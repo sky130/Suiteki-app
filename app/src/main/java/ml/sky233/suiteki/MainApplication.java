@@ -16,6 +16,8 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.clj.fastble.BleManager;
 
@@ -43,6 +45,8 @@ public class MainApplication extends Application {
     public static Suiteki suiteki;
     public static int i = -1;
 
+
+
     public void onCreate() {
         super.onCreate();
         BleManager.getInstance().init(this);
@@ -66,6 +70,7 @@ public class MainApplication extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             SettingUtils.setValue("is_android_8", true);
         application = this;
+
 
 //        devicesList.addDeviceInfo(new DeviceInfo("0x72beedb8a536a824a8ff05ba03a5f7c9","F5:4D:31:35:9B:57","miband7","小米手环7"));
 //        devicesList.addDeviceInfo(new DeviceInfo("0x72beedb8a536a824a8ff05ba03a5f7c9","F5:4D:31:35:9B:56","miband7","小米手环7"));

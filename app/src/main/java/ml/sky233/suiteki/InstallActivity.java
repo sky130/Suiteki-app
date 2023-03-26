@@ -204,4 +204,10 @@ public class InstallActivity extends AppCompatActivity implements ProgressCallba
         tv_int.setText(progress + "%");
         this.progress.setProgress(progress);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
 }

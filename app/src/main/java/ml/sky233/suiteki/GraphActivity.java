@@ -74,4 +74,10 @@ public class GraphActivity extends AppCompatActivity implements GraphCallback {
         progressBar.setVisibility(View.INVISIBLE);
         title_view.setText(title);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
 }
