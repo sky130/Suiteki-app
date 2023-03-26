@@ -32,7 +32,7 @@ public class BleDeviceInfo {
 
     public void sleep() {
         try {
-            Thread.sleep(250);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

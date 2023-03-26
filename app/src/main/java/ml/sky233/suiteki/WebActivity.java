@@ -10,11 +10,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.util.Objects;
+
+import ml.sky233.suiteki.util.ViewUtils;
 
 public class WebActivity extends AppCompatActivity {
     WebView webView;
@@ -28,6 +31,11 @@ public class WebActivity extends AppCompatActivity {
         if (this.getApplicationContext().getResources().getConfiguration().uiMode != 0x21)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         initView();
+        View v = findViewById(R.id.title_web_back);
+        ViewUtils.addTouchScale(v);
+        v.setOnClickListener((i) -> {
+            WebActivity.this.finish();
+        });
         webView.loadUrl(url);
     }
 

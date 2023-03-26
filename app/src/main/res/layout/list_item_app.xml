@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_list_item"
-    android:padding="17dp"
     android:layout_marginTop="10dp"
-    android:orientation="horizontal">
+    android:background="@drawable/bg_list_item_pink"
+    android:orientation="horizontal"
+    android:padding="17dp">
 
-    <ImageView
-        android:id="@+id/item_app_img"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="start"
-        android:maxHeight="55dp"
-        android:minHeight="55dp"
-        android:adjustViewBounds="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_app_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:adjustViewBounds="true"
+            android:maxHeight="55dp"
+            android:minHeight="55dp"
+            android:src="@drawable/bg_ic_shape"
+            app:tint="@color/pink" />
+
+        <ImageView
+            android:id="@+id/item_app_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:adjustViewBounds="true"
+            android:maxHeight="55dp"
+            android:minHeight="55dp"
+            android:src="@drawable/ic_app_help" />
+    </FrameLayout>
+
+
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:id="@+id/item_app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
         android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textSize="19sp"
-        android:textColor="@color/blue"
         android:text="应用设置"
-        android:layout_gravity="start|center_vertical"/>
+        android:textColor="@color/pink"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import ml.sky233.SuitekiObject;
 import ml.sky233.SuitekiUtils;
 import ml.sky233.suiteki.adapter.AppAdapter;
+import ml.sky233.suiteki.adapter.AppBlueAdapter;
 import ml.sky233.suiteki.adapter.DeviceAdapter;
 import ml.sky233.suiteki.bean.AppObject;
 import ml.sky233.suiteki.bean.device.DeviceInfo;
@@ -70,7 +71,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         list.add(new AppObject("小米穿戴", R.drawable.ic_device_miband_7));
         list.add(new AppObject("ZeppLife", R.drawable.ic_device_miband_7));
         list.add(new AppObject("Zepp", R.drawable.ic_device_miband_7));
-        AppAdapter adapter = new AppAdapter(this, list);
+        AppBlueAdapter adapter = new AppBlueAdapter(this, list);
         adapter.setOnItemClickListener((v, i) -> {
             switch (i) {
                 case 0://小米运动健康
