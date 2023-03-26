@@ -5,6 +5,7 @@ import static ml.sky233.suiteki.MainApplication.suiteki;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +14,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ml.sky233.SuitekiObject;
 import ml.sky233.SuitekiUtils;
@@ -83,7 +88,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         return;
                     }
                     if (!FileUtils.isGetPermission(AddDeviceActivity.this, pm)) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             FileUtils.startFor(this, FileUtils.buildUri(pm));
                         } else {
                             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
@@ -91,7 +96,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                             else
                                 ActivityCompat.requestPermissions(AddDeviceActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
                         }
-                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         getDeviceList(pm, true);
                     }
                     break;
@@ -130,17 +135,29 @@ public class AddDeviceActivity extends AppCompatActivity {
         }, 120);
         if (isAndroid11)
             new Thread(() -> {
-                if (path.equals("com.mi.health"))
-                    suiteki.setLog(FileUtils.getInputText(this, FileUtils.buildUri2(FileUtils.mi_health_path)));
-                if (path.equals("com.xiaomi.wearable"))
-                    suiteki.setLog(FileUtils.getInputText(this, FileUtils.buildUri2(FileUtils.mi_wearable_path)));
+                List<UriPermission> pList = getContentResolver().getPersistedUriPermissions();
+                for (UriPermission uriPermission : pList) {
+                    Uri uri = uriPermission.getUri();
+                    if (TextUtils.lookFor(uri.getPath(), path)) {
+                        DocumentFile df = DocumentFile.fromTreeUri(this,uri);
+                        if (path.equals("com.mi.health"))
+                            suiteki.setLog(FileUtils.getInputText(this,
+                                    df.findFile("files")
+                                    .findFile("log")
+                                    .findFile("XiaomiFit.device.log")
+                                    .getUri()));
+                        else if (path.equals("com.xiaomi.wearable"))
+                            suiteki.setLog(FileUtils.getInputText(this, df.findFile("files").findFile("log").findFile("Wearable.log").getUri()));
+                    }
+                }
+//
                 ArrayList<SuitekiObject> sobjs = suiteki.getAuthKeyList();
                 if (sobjs.size() == 0)
                     Dialog("请重新结束运行官方应用,详细请查看帮助");
                 else {
                     DevicesList devicesList = new DevicesList(this, true);
                     for (int i = 0; i < sobjs.size(); i++) {
-                        devicesList.addDeviceInfo(new DeviceInfo("0x"+sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
+                        devicesList.addDeviceInfo(new DeviceInfo("0x" + sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
                     }
                     DeviceAdapter adapter = new DeviceAdapter(this, devicesList);
                     adapter.setOnItemClickListener((v, i) -> {
@@ -163,7 +180,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                 else {
                     DevicesList devicesList = new DevicesList(this, true);
                     for (int i = 0; i < sobjs.size(); i++) {
-                        devicesList.addDeviceInfo(new DeviceInfo("0x"+sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
+                        devicesList.addDeviceInfo(new DeviceInfo("0x" + sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
                     }
                     DeviceAdapter adapter = new DeviceAdapter(this, devicesList);
                     adapter.setOnItemClickListener((v, i) -> {
@@ -218,7 +235,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                     DevicesList devicesList = new DevicesList(this, true);
                     for (int i = 0; i < sobjs.size(); i++) {
                         SuitekiObject sobj = sobjs.get(i);
-                        devicesList.addDeviceInfo(new DeviceInfo("0x"+sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
+                        devicesList.addDeviceInfo(new DeviceInfo("0x" + sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
                     }
                     DeviceAdapter adapter = new DeviceAdapter(this, devicesList);
                     adapter.setOnItemClickListener((v, i) -> {
@@ -286,7 +303,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         DevicesList devicesList = new DevicesList(this, true);
                         for (int i = 0; i < sobjs.size(); i++) {
                             SuitekiObject sobj = sobjs.get(i);
-                            devicesList.addDeviceInfo(new DeviceInfo("0x"+sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
+                            devicesList.addDeviceInfo(new DeviceInfo("0x" + sobjs.get(i).getAuthKey(), sobjs.get(i).getMac(), SuitekiUtils.getModelName(sobjs.get(i).getDeviceName()), sobjs.get(i).getDeviceName() == "" ? "未知设备" : SuitekiUtils.getModelName(sobjs.get(i).getDeviceName())));
                         }
                         DeviceAdapter adapter = new DeviceAdapter(this, devicesList);
                         adapter.setOnItemClickListener((v, i) -> {
@@ -304,10 +321,11 @@ public class AddDeviceActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 }

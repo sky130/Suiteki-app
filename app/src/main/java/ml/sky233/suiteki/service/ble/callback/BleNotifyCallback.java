@@ -11,6 +11,7 @@ import java.util.UUID;
 import ml.sky233.suiteki.MainApplication;
 import ml.sky233.suiteki.service.ble.BleActions;
 import ml.sky233.suiteki.service.ble.HuamiService;
+import ml.sky233.suiteki.util.BleLogTools;
 import ml.sky233.suiteki.util.BytesUtils;
 
 public class BleNotifyCallback extends com.clj.fastble.callback.BleNotifyCallback {
@@ -37,6 +38,7 @@ public class BleNotifyCallback extends com.clj.fastble.callback.BleNotifyCallbac
     @Override
     public void onCharacteristicChanged(byte[] value) {
         Log.d(MainApplication.TAG, "UUID:" + uuid.toString() + "\n" + "value:" + BytesUtils.bytesToHexStr(value));
+        BleLogTools.onCharacteristicChanged(value);
         if (uuid.equals(HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY))
             context.sendBroadcast(new Intent()
                     .setAction(BleActions.ACTION_BLE_AUTH_NOTIFY)

@@ -26,7 +26,8 @@ import ml.sky233.suiteki.util.BleLogTools;
 import ml.sky233.suiteki.util.BytesUtils;
 import ml.sky233.suiteki.util.Crypto.CryptoUtils;
 import ml.sky233.suiteki.util.Crypto.ECDH_B163;
-    import ml.sky233.suiteki.util.MsgUtils;
+import ml.sky233.suiteki.util.MsgUtils;
+
 @SuppressLint("MissingPermission")
 public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     Handler handler;
@@ -119,7 +120,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     public void doPerform() {
         BleService.setStatus(HuamiService.STATUS_BLE_AUTHING);
         new Random().nextBytes(privateEC);
-        publicEC = ml.sky233.suiteki.util.Crypto .ECDH_B163.ecdh_generate_public(privateEC);
+        publicEC = ml.sky233.suiteki.util.Crypto.ECDH_B163.ecdh_generate_public(privateEC);
         byte[] sendPubkeyCommand = new byte[48 + 4];
         sendPubkeyCommand[0] = 0x04;
         sendPubkeyCommand[1] = 0x02;
@@ -196,6 +197,8 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
 
     public byte[] getSecretKey(String authKey) {
         byte[] authKeyBytes = new byte[]{0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
+        if (!authKey.startsWith("0x"))
+            authKey = "0x" + authKey;
         if (authKey != null && !authKey.isEmpty()) {
             byte[] srcBytes = authKey.trim().getBytes();
             if (authKey.length() == 34 && authKey.substring(0, 2).equals("0x")) {
@@ -210,7 +213,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         if (payload[0] == 0x10 && payload[1] == 0x04 && payload[2] == 0x01) {
             System.arraycopy(payload, 3, remoteRandom, 0, 16);
             System.arraycopy(payload, 19, remotePublicEC, 0, 48);
-            sharedEC = ECDH_B163 .ecdh_generate_shared(privateEC, remotePublicEC);
+            sharedEC = ECDH_B163.ecdh_generate_shared(privateEC, remotePublicEC);
             int encryptedSequenceNumber = (sharedEC[0] & 0xff) | ((sharedEC[1] & 0xff) << 8) | ((sharedEC[2] & 0xff) << 16) | ((sharedEC[3] & 0xff) << 24);
             byte[] secretKey = authKey;
             for (int i = 0; i < 16; i++) {
@@ -241,7 +244,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
             BleService.setStatus(HuamiService.STATUS_BLE_AUTHED);
             BleService.setStatus(HuamiService.STATUS_BLE_CONNECTED);
             BleService.setStatus(HuamiService.STATUS_BLE_NORMAL);
-            new BleDeviceInfo(bleDevice) ;
+            new BleDeviceInfo(bleDevice);
             return;
         } else {
             return;

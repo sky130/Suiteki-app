@@ -6,18 +6,23 @@ package ml.sky233.suiteki.util;
 
 import android.annotation.SuppressLint;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ml.sky233.suiteki.MainApplication;
+
 @SuppressLint("SimpleDateFormat")
 public class BleLogTools {
-    public static List<String> log_list;
-    public static boolean isDev = false;
+    public static List<String> log_list = new ArrayList<>();
+    ;
+    public static boolean isDev = true;
 
     public static void start(String mode, int appId, String macAddress) {
-        isDev = SettingUtils.getValue("ble_log_cat");
+//        isDev = SettingUtils.getValue("ble_log_cat");
         if (!isDev) return;
         log_list = new ArrayList<>();
         addLog("Mode:" + mode);
@@ -120,7 +125,7 @@ public class BleLogTools {
         writeLog();
     }
 
-    public static void onCharacteristicChanged( byte[] data) {
+    public static void onCharacteristicChanged(byte[] data) {
         if (!isDev) return;
         addLog("onCharacteristicChanged");
         addLog("data:" + BytesUtils.bytesToHexStr(data));
@@ -158,10 +163,27 @@ public class BleLogTools {
     }
 
     private static void writeLog() {
+//        FileUtils.writeFileText(MainApplication.e_data_path + "/log.txt", log_list.toString());
+        File file = new File(MainApplication.e_data_path + "/log.txt");
+        try {
+            if (!file.exists())
+                file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (log_list == null) {
+            FileUtils.writeFileText(MainApplication.e_data_path + "/log.txt", "error");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < log_list.size(); i++)
+            sb.append("\n").append(log_list.get(i));
+        FileUtils.writeFileText(MainApplication.e_data_path + "/log.txt"
+                , sb.toString());
     }
 
     private static void addLog(String s) {
-
+        log_list.add(s);
     }
 
 }

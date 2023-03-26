@@ -94,7 +94,7 @@ public class FirmwareInstaller {
                     }
                 });
         try {
-            Thread.sleep(10);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

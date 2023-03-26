@@ -43,6 +43,7 @@ public class MainApplication extends Application {
     public static String data_path;
 
     public static Suiteki suiteki;
+    public static String e_data_path;
     public static int i = -1;
 
 
@@ -64,6 +65,7 @@ public class MainApplication extends Application {
         devicesList = new DevicesList(this);
         LogUtils.initUtils();
         data_path = getFilesDir().toString();
+        e_data_path= getExternalFilesDir("").getPath();
         i = devicesList.getDeviceInfoIndex();
         suiteki = new Suiteki();
         SettingUtils.init(sharedPreferences);
