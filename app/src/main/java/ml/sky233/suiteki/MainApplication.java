@@ -54,7 +54,7 @@ public class MainApplication extends Application {
         BleManager.getInstance()
                 .enableLog(true)
                 .setReConnectCount(5, 5000)
-                .setSplitWriteNum(512)
+                .setSplitWriteNum(244)
                 .setConnectOverTime(10000)
                 .setOperateTimeout(5000);
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
