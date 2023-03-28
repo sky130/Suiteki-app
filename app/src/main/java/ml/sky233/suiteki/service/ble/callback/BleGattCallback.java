@@ -73,6 +73,17 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         mGatt = bluetoothGatt;
         this.bleDevice = bleDevice;
         new Thread(() -> {
+            BleManager.getInstance().setMtu(bleDevice, 512, new BleMtuChangedCallback() {
+                @Override
+                public void onSetMTUFailure(BleException exception) {
+                    // 设置MTU失败
+                }
+
+                @Override
+                public void onMtuChanged(int mtu) {
+                    // 设置MTU成功，并获得当前设备传输支持的MTU值
+                }
+            });
             BleManager.getInstance().notify(bleDevice,
                     HuamiService.UUID_SERVICE_MIBAND_SERVICE.toString(),
                     HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY.toString(),
