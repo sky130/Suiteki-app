@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import ml.sky233.Suiteki;
 import ml.sky233.suiteki.bean.device.DeviceInfo;
+import ml.sky233.suiteki.handler.CrashHandler;
 import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.util.FileUtils;
 import ml.sky233.suiteki.util.GirlFriend;
@@ -35,6 +36,7 @@ import ml.sky233.suiteki.bean.device.DevicesList;
 
 public class MainApplication extends Application {
     public static ClipboardManager clipboardManager;
+    public static Context context;
     public static Application application;
     public static SharedPreferences sharedPreferences;
     public static String TAG = "Suiteki.test", NAME = "ケ・ウェン・ティン";
@@ -45,7 +47,6 @@ public class MainApplication extends Application {
     public static Suiteki suiteki;
     public static String e_data_path;
     public static int i = -1;
-
 
 
     public void onCreate() {
@@ -60,27 +61,21 @@ public class MainApplication extends Application {
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         GirlFriend sky233GirlFriend = new GirlFriend(NAME);
+        LogUtils.initUtils();
+        context = this;
         Log.d(TAG, sky233GirlFriend.getName());
         appList = new AppList(this);
         devicesList = new DevicesList(this);
-        LogUtils.initUtils();
         data_path = getFilesDir().toString();
-        e_data_path= getExternalFilesDir("").getPath();
+        e_data_path = getExternalFilesDir("").getPath();
         i = devicesList.getDeviceInfoIndex();
         suiteki = new Suiteki();
         SettingUtils.init(sharedPreferences);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             SettingUtils.setValue("is_android_8", true);
         application = this;
-
-
-//        devicesList.addDeviceInfo(new DeviceInfo("0x72beedb8a536a824a8ff05ba03a5f7c9","F5:4D:31:35:9B:57","miband7","小米手环7"));
-//        devicesList.addDeviceInfo(new DeviceInfo("0x72beedb8a536a824a8ff05ba03a5f7c9","F5:4D:31:35:9B:56","miband7","小米手环7"));
-
-//        devicesList.setDeviceInfo(0);
+        CrashHandler.getInstance().init(this);
         startBleService();
-
-
     }
 
     public static Handler handler = new Handler(Looper.getMainLooper()) {
@@ -106,7 +101,7 @@ public class MainApplication extends Application {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((BleService.LocalBinder) service).getService();
                 if (mService != null) {
-                    if(devicesList.getDeviceInfoIndex()!=-1){
+                    if (devicesList.getDeviceInfoIndex() != -1) {
                         DeviceInfo deviceInfo = devicesList.getDeviceInfo();
                         mService.connectDevice(deviceInfo.Mac, deviceInfo.AuthKey);
                     }

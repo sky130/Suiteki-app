@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleMtuChangedCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
@@ -81,23 +82,23 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
 
                 @Override
                 public void onMtuChanged(int mtu) {
+                    BleManager.getInstance().notify(bleDevice,
+                            HuamiService.UUID_SERVICE_MIBAND_SERVICE.toString(),
+                            HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY.toString(),
+                            new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY));
+                    BleManager.getInstance().notify(bleDevice,
+                            HuamiService.UUID_SERVICE_FIRMWARE.toString(),
+                            HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY.toString(),
+                            new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    doPerform();
                     // 设置MTU成功，并获得当前设备传输支持的MTU值
                 }
             });
-            BleManager.getInstance().notify(bleDevice,
-                    HuamiService.UUID_SERVICE_MIBAND_SERVICE.toString(),
-                    HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY.toString(),
-                    new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_AUTH_NOTIFY));
-            BleManager.getInstance().notify(bleDevice,
-                    HuamiService.UUID_SERVICE_FIRMWARE.toString(),
-                    HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY.toString(),
-                    new BleNotifyCallback(context, HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY));
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            doPerform();
         }).start();
 
     }
@@ -375,5 +376,8 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
             throw new RuntimeException(e);
         }
     }
-
+    /*
+     10D40000000001A8020000
+     10D40020000000
+     */
 }
