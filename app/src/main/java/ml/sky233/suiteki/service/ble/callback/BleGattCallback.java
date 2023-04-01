@@ -121,7 +121,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
             byte[] bytes = intent.getByteArrayExtra("value");
             if (!checkAuthed) {
                 if (bytes[0] == 16 && bytes[1] == -46 && bytes[2] == 1)
-                    setStatus(HuamiService.STATUS_BLE_CONNECTED);
+                    setStatus(HuamiService.STATUS_BLE_NORMAL);
                 else
                     doPerform();//当官方应用未连接时会尝试自己连接
                 checkAuthed = true;
