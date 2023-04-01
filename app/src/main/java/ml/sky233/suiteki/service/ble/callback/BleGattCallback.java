@@ -50,6 +50,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     ByteBuffer reassemblyBuffer;
     Context context;
     ReAuthCallback callback;
+    boolean checkAuthed = false;
 
 
     public BleGattCallback(Handler handler, Context context, String authKey) {
@@ -95,7 +96,8 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    doPerform();
+                    checkAuthed=false;
+                    checkAuthed();
                     // 设置MTU成功，并获得当前设备传输支持的MTU值
                 }
             });
@@ -109,14 +111,21 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         doPerform();
     }
 
-    int i = 0;
-    final Object object = new Object();
 
     public void onCharacteristicsChange(Intent intent) {
         if (intent.getAction().equals(BleActions.ACTION_BLE_AUTH_NOTIFY)) {
             byte[] bytes = intent.getByteArrayExtra("value");
             if (bytes.length <= 1 || bytes[0] != 0x03) return;
             decode(bytes);
+        } else if (intent.getAction().equals(BleActions.ACTION_BLE_FIRMWARE_NOTIFY)) {
+            byte[] bytes = intent.getByteArrayExtra("value");
+            if (!checkAuthed) {
+                if (bytes[0] == 16 && bytes[1] == -46 && bytes[2] == 1)
+                    setStatus(HuamiService.STATUS_BLE_AUTHED);
+                else
+                    doPerform();//当官方应用未连接时会尝试自己连接
+                checkAuthed = true;
+            }
         }
     }
 
@@ -207,17 +216,18 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         }
     }
 
-    public byte[] getSecretKey(String authKey) {
+    public byte[] getSecretKey(String key) {
         byte[] authKeyBytes = new byte[]{0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
-        if (!authKey.startsWith("0x"))
-            authKey = "0x" + authKey;
-        if (authKey != null && !authKey.isEmpty()) {
-            byte[] srcBytes = authKey.trim().getBytes();
-            if (authKey.length() == 34 && authKey.substring(0, 2).equals("0x")) {
-                srcBytes = BytesUtils.hexToBytes(authKey.substring(2));
-            }
-            System.arraycopy(srcBytes, 0, authKeyBytes, 0, Math.min(srcBytes.length, 16));
+        String authKey = "";
+        if (!key.startsWith("0x"))
+            authKey = "0x" + key;
+        else
+            authKey = key;
+        byte[] srcBytes = authKey.trim().getBytes();
+        if (authKey.length() == 34 && authKey.startsWith("0x")) {
+            srcBytes = BytesUtils.hexToBytes(authKey.substring(2));
         }
+        System.arraycopy(srcBytes, 0, authKeyBytes, 0, Math.min(srcBytes.length, 16));
         return authKeyBytes;
     }
 
@@ -352,6 +362,29 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                 header_size++;
             }
             count++;
+        }
+    }
+
+    public void checkAuthed() {
+        byte[] bytes = {-46, 8, 0, 0, 1, 0, 67, -111, 17, -29, 0, 32, 0, -1};
+        BleManager.getInstance().write(bleDevice,
+                HuamiService.UUID_SERVICE_FIRMWARE.toString(),
+                HuamiService.UUID_CHARACTERISTIC_FIRMWARE_NOTIFY.toString(),
+                bytes, new BleWriteCallback() {
+                    @Override
+                    public void onWriteSuccess(int i, int i1, byte[] bytes) {
+                        BleLogTools.onWriteSuccess(bytes);
+                    }
+
+                    @Override
+                    public void onWriteFailure(BleException e) {
+                        BleLogTools.onWriteFailure(bytes);
+                    }
+                });
+        try {
+            Thread.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

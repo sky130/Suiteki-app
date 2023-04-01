@@ -15,19 +15,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.clj.fastble.BleManager;
 
-import java.io.IOException;
 
 import ml.sky233.Suiteki;
 import ml.sky233.suiteki.bean.device.DeviceInfo;
 import ml.sky233.suiteki.handler.CrashHandler;
 import ml.sky233.suiteki.service.ble.BleService;
-import ml.sky233.suiteki.util.FileUtils;
 import ml.sky233.suiteki.util.GirlFriend;
 import ml.sky233.suiteki.util.LogUtils;
 import ml.sky233.suiteki.util.SettingUtils;
@@ -36,6 +31,7 @@ import ml.sky233.suiteki.bean.device.DevicesList;
 
 public class MainApplication extends Application {
     public static ClipboardManager clipboardManager;
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
     public static Application application;
     public static SharedPreferences sharedPreferences;
@@ -76,6 +72,7 @@ public class MainApplication extends Application {
         application = this;
         CrashHandler.getInstance().init(this);
         startBleService();
+        devicesList.addDeviceInfo(new DeviceInfo("","CC:3C:44:6C:DB:42","","测试安装"));
     }
 
     public static Handler handler = new Handler(Looper.getMainLooper()) {
@@ -132,11 +129,4 @@ public class MainApplication extends Application {
 
     public static ServiceConnection mServiceConnection;
 
-    public void onClick(View view) {
-        try {
-            mService.writeFirmware(FileUtils.getFileBytes(getAssets().open("device.zip")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
