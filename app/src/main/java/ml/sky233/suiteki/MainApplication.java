@@ -72,7 +72,6 @@ public class MainApplication extends Application {
         application = this;
         CrashHandler.getInstance().init(this);
         startBleService();
-        devicesList.addDeviceInfo(new DeviceInfo("","CC:3C:44:6C:DB:42","","测试安装"));
     }
 
     public static Handler handler = new Handler(Looper.getMainLooper()) {
