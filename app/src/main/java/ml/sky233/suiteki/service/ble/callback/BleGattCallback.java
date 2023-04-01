@@ -19,6 +19,7 @@ import java.util.Random;
 import ml.sky233.suiteki.MainApplication;
 import ml.sky233.suiteki.callback.ReAuthCallback;
 import ml.sky233.suiteki.service.ble.BleActions;
+import ml.sky233.suiteki.service.ble.BleAppInfo;
 import ml.sky233.suiteki.service.ble.BleDeviceInfo;
 import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.service.ble.HuamiService;
@@ -32,6 +33,7 @@ import ml.sky233.suiteki.util.MsgUtils;
 @SuppressLint("MissingPermission")
 public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     Handler handler;
+    public boolean isAuthedBySuiteki = false;//检查Suiteki自身是否验证过了
     BluetoothGatt mGatt;
     public BleDevice bleDevice;
     byte writeHandle;
@@ -43,6 +45,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
     final byte[] finalSharedSessionAES = new byte[16];
     int encryptedSequenceNr;
     byte[] authKey;
+    public BleAppInfo bleAppInfo;
 
     Byte currentHandle;
     int currentType;
@@ -57,6 +60,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         this.handler = handler;
         this.context = context;
         this.authKey = getSecretKey(authKey);
+        this.bleAppInfo = new BleAppInfo(this);
     }
 
     @Override
@@ -96,7 +100,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    checkAuthed=false;
+                    checkAuthed = false;
                     checkAuthed();
                     // 设置MTU成功，并获得当前设备传输支持的MTU值
                 }
@@ -120,11 +124,18 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         } else if (intent.getAction().equals(BleActions.ACTION_BLE_FIRMWARE_NOTIFY)) {
             byte[] bytes = intent.getByteArrayExtra("value");
             if (!checkAuthed) {
-                if (bytes[0] == 16 && bytes[1] == -46 && bytes[2] == 1)
+                if (bytes[0] == 16 && bytes[1] == -46 && bytes[2] == 1) {//10D201
                     setStatus(HuamiService.STATUS_BLE_NORMAL);
-                else
+                } else
                     doPerform();//当官方应用未连接时会尝试自己连接
                 checkAuthed = true;
+            }
+            if (bytes[0] == 16 && bytes[1] == -46 && bytes[2] == 10) {//10D20A
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -206,8 +217,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
             }
             try {
                 byte[] finalBuf = buf;
-                new Thread(() ->
-                        handle2021Payload((short) currentType, finalBuf)).start();
+                new Thread(() -> handle2021Payload((short) currentType, finalBuf)).start();
             } catch (final Exception e) {
                 e.printStackTrace();
             }
@@ -263,13 +273,15 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                 callback = null;
             }
             Log.d(MainApplication.TAG, "onAuthSuccess");
+            bleAppInfo.requestAppItems();
             BleService.setStatus(HuamiService.STATUS_BLE_AUTHED);
             BleService.setStatus(HuamiService.STATUS_BLE_CONNECTED);
             BleService.setStatus(HuamiService.STATUS_BLE_NORMAL);
+            isAuthedBySuiteki = true;
             new BleDeviceInfo(bleDevice);
             return;
         } else {
-            return;
+            bleAppInfo.decodeAndUpdateDisplayItems((short) currentType, payload);
         }
     }
 
@@ -365,6 +377,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
         }
     }
 
+
     public void checkAuthed() {
         byte[] bytes = {-46, 8, 0, 0, 1, 0, 67, -111, 17, -29, 0, 32, 0, -1};
         BleManager.getInstance().write(bleDevice,
@@ -381,11 +394,6 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                         BleLogTools.onWriteFailure(bytes);
                     }
                 });
-        try {
-            Thread.sleep(3);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void writeAuth(byte[] bytes) {
@@ -395,6 +403,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                 bytes, new BleWriteCallback() {
                     @Override
                     public void onWriteSuccess(int i, int i1, byte[] bytes) {
+                        Log.d("Suiteki.test.1", BytesUtils.bytesToHexStr(bytes));
                         BleLogTools.onWriteSuccess(bytes);
                     }
 
@@ -404,7 +413,7 @@ public class BleGattCallback extends com.clj.fastble.callback.BleGattCallback {
                     }
                 });
         try {
-            Thread.sleep(3);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

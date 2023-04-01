@@ -23,6 +23,24 @@ public class TextUtils {
         }
     }
 
+    public static StringBuilder join(String separator, String... elements) {
+        StringBuilder builder = new StringBuilder();
+        if (elements == null) {
+            return builder;
+        }
+        boolean hasAdded = false;
+        for (String element : elements) {
+            if (element != null && element.length() > 0) {
+                if (hasAdded) {
+                    builder.append(separator);
+                }
+                builder.append(element);
+                hasAdded = true;
+            }
+        }
+        return builder;
+    }
+
     public static String listToString(ArrayList<String> arrayList) {
         if (arrayList == null) return "";
         if (arrayList.size() == 0) return "";
