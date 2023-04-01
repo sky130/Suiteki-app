@@ -91,12 +91,17 @@ public class BleService extends Service {
 
     public void writeFirmware(byte[] arrayBytes) {
         if (ble_status != HuamiService.STATUS_BLE_NORMAL) return;
-        firmwareInstaller = new FirmwareInstaller(this, mGatt, arrayBytes, bleGattCallback.bleDevice, handler);
+        new Thread(() -> {
+            firmwareInstaller = new FirmwareInstaller(this, mGatt, arrayBytes, bleGattCallback.bleDevice, handler);
+
+        }).start();
     }
 
     public void writeFirmware(byte[] arrayBytes, ProgressCallback callback) {
         if (ble_status != HuamiService.STATUS_BLE_NORMAL) return;
-        firmwareInstaller = new FirmwareInstaller(this, mGatt, arrayBytes, bleGattCallback.bleDevice, handler, callback);
+        new Thread(() -> {
+            firmwareInstaller = new FirmwareInstaller(this, mGatt, arrayBytes, bleGattCallback.bleDevice, handler, callback);
+        }).start();
     }
 
 

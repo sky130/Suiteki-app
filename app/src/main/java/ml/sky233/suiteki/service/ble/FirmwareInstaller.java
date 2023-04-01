@@ -29,6 +29,7 @@ public class FirmwareInstaller {
     int doPerform = 0;
     int finalPerform = 0;
     int dataIndex = 0;
+    int dataIndex_for_progress = 0;//该变量的定义只是为了进度条而存在
     Context context;
     public BluetoothGatt mGatt;
     public byte[] firmware_bytes;
@@ -82,10 +83,15 @@ public class FirmwareInstaller {
         BleManager.getInstance().write(bleDevice,
                 HuamiService.UUID_SERVICE_FIRMWARE.toString(),
                 HuamiService.UUID_CHARACTERISTIC_FIRMWARE_WRITE.toString(),
-                bytes, new BleWriteCallback() {
+                bytes,
+                true,
+                true,
+                0,
+                new BleWriteCallback() {
                     @Override
                     public void onWriteSuccess(int i, int i1, byte[] bytes) {
                         BleLogTools.onWriteSuccess(bytes);
+                        updateProgress();
                     }
 
                     @Override
@@ -94,7 +100,7 @@ public class FirmwareInstaller {
                     }
                 });
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -129,20 +135,23 @@ public class FirmwareInstaller {
     }
 
     public void writeBytes() {
-        new Thread(() -> {
-            int remaining = Math.min(spilt_byte.size() - dataIndex, 34);
-            for (int i = 0; i < remaining; i++) {
-                if (callback != null)
-                    callback.onProgressChange((int) (((double) dataIndex / (double) spilt_byte.size()) * (double) 100));
-                else
-                    context.sendBroadcast(new Intent()
-                            .setAction(BleActions.ACTION_BLE_FIRMWARE_INSTALLING)
-                            .putExtra("progress", (int) (((double) dataIndex / (double) spilt_byte.size()) * (double) 100)));
-                byte[] data = spilt_byte.get(dataIndex);
-                dataIndex++;
-                writeFirmware(data);
-            }
-        }).start();
+        int remaining = Math.min(spilt_byte.size() - dataIndex, 34);
+        byte[] bytes = new byte[0];
+        for (int i = 0; i < remaining; i++) {
+            bytes = BytesUtils.addTwoArray(bytes, spilt_byte.get(dataIndex));
+            dataIndex++;
+        }
+        writeFirmware(bytes);
+    }
+
+    private void updateProgress() {
+        if (callback != null)
+            callback.onProgressChange((int) (((double) dataIndex_for_progress / (double) spilt_byte.size()) * (double) 100));
+        else
+            context.sendBroadcast(new Intent()
+                    .setAction(BleActions.ACTION_BLE_FIRMWARE_INSTALLING)
+                    .putExtra("progress", (int) (((double) dataIndex_for_progress / (double) spilt_byte.size()) * (double) 100)));
+        dataIndex_for_progress++;
     }
 
     public void onCharacteristicChange(Intent intent) {

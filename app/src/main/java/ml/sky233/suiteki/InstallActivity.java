@@ -117,28 +117,6 @@ public class InstallActivity extends AppCompatActivity implements ProgressCallba
         return super.onKeyUp(keyCode, event);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-//        super.onActivityResult(requestCode, resultCode, resultData);
-//        if (resultData == null) return;
-//        progress.setProgress(0);
-//        tv_text.setText("正在安装");
-//        tv_int.setText("0%");
-//        btn.setEnabled(false);
-//        Log.d(TAG, resultData.getData().toString());
-//        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//            DocumentFile df = DocumentFile.fromSingleUri(this, resultData.getData());
-//            try {
-//                InputStream inputStream = getContentResolver().openInputStream(df.getUri());
-//                mService.writeFirmware(FileUtils.getFileBytes(inputStream), callback);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//                StringWriter stringWriter = new StringWriter();
-//                e.printStackTrace(new PrintWriter(stringWriter));
-//            }
-//        }
-//    }
-
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @SuppressLint("SetTextI18n")
         @Override
