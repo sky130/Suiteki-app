@@ -33,19 +33,13 @@ public class DeviceActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (this.getApplicationContext().getResources().getConfiguration().uiMode != 0x21)
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        setContentView(R.layout.activity_device);
-        View back = findViewById(R.id.title_device_back);
-        ViewUtils.addTouchScale(back);
-        back.setOnClickListener((v) -> {
-            MainApplication.handler.sendMessage(MsgUtils.build("", 1));
-            DeviceActivity.this.finish();
-        });
-        View add = findViewById(R.id.title_device_add);
-        ViewUtils.addTouchScale(add);
-        add.setOnClickListener((v) -> {
-            startActivity(new Intent(this, AddDeviceActivity.class));
-            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-        });
+        setContentView(R.layout.dialog_device);
+//        View add = findViewById(R.id.title_device_add);
+//        ViewUtils.addTouchScale(add);
+//        add.setOnClickListener((v) -> {
+//            startActivity(new Intent(this, AddDeviceActivity.class));
+//            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//        });
         recycler = findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }

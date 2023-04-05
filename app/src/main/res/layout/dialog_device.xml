@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_window"
-
+    style="@style/Theme.Suiteki.Dialog"
     tools:context=".DeviceActivity">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/linearLayout"
         style="@style/Theme.Suiteki.Title.Back"
@@ -20,14 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
-            android:id="@+id/title_device_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:maxHeight="40dp"
-            android:src="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/title_device"
@@ -42,26 +35,30 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/title_device_add"
-        android:layout_width="wrap_content"
+    <ml.sky233.suiteki.widget.SuitekiListButton
+        android:id="@+id/btn_add_device"
+        style="@style/Theme.Suiteki.ListButton"
+        android:padding="28dp"
+        android:drawableStart="@drawable/ic_add"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:gravity="center"
+        android:text="点击添加设备"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:adjustViewBounds="true"
-        android:maxHeight="50dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:clipToPadding="false"
         android:overScrollMode="never"
@@ -69,5 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_device" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

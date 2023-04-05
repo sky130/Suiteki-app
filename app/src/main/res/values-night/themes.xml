@@ -15,7 +15,12 @@
         <item name="exb_backgroundColor">@color/black_3</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.Suiteki.Dialog" >
+
+    <style name="Theme.Suiteki.Dialog">
+        <item name="android:background">@drawable/bg_dialog_night</item>
+    </style>
+
+    <style name="Theme.Suiteki.BottomDialog">
         <item name="android:background">@drawable/bg_dialog_night</item>
     </style>
 </resources>

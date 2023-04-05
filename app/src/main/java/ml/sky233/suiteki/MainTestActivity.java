@@ -60,11 +60,9 @@ public class MainTestActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         bar.getMenu().select(R.id.navigation_home);
-                        binding.container.setBackgroundResource(R.drawable.bg_window);
                         break;
                     case 1:
                         bar.getMenu().select(R.id.navigation_dashboard);
-                        binding.container.setBackgroundResource(R.drawable.bg_window_pink);
                         break;
                 }
             }
@@ -77,10 +75,8 @@ public class MainTestActivity extends AppCompatActivity {
         bar.setOnItemSelectedListener((view, menuItem, aBoolean) -> {
             if (menuItem.getId() == R.id.navigation_home) {
                 viewPager.setCurrentItem(0);
-                binding.container.setBackgroundResource(R.drawable.bg_window);
             } else if (menuItem.getId() == R.id.navigation_dashboard) {
                 viewPager.setCurrentItem(1);
-                binding.container.setBackgroundResource(R.drawable.bg_window_pink);
             }
             return null;
         });

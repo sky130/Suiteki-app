@@ -12,10 +12,10 @@
     <color name="blue_3">#336185FB</color>
     <color name="black_2">#121212</color>
     <color name="black_3">#212121</color>
-    <color name="pink">#FE679A</color>
-    <color name="pink_2">#80FE679A</color>
-    <color name="pink_3">#33FE679A</color>
-
+    <color name="pink">#FC8BAB</color>
+    <color name="pink_2">#80FC8BAB</color>
+    <color name="pink_3">#33FC8BAB</color>
+    <color name="transparent">#00000000</color>
     <color name="blue_s">#AABFF7</color>
 
 </resources>

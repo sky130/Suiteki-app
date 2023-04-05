@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.2'
     implementation 'androidx.navigation:navigation-ui:2.5.2'
     implementation 'com.github.st235:expandablebottombar:1.5.1'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     def appCenterSdkVersion = '5.0.0'
     implementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
 }

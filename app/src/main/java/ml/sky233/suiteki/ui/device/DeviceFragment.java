@@ -1,5 +1,6 @@
 package ml.sky233.suiteki.ui.device;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,22 +17,25 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import ml.sky233.suiteki.DeviceActivity;
 import ml.sky233.suiteki.InstallActivity;
+import ml.sky233.suiteki.MainApplication;
 import ml.sky233.suiteki.R;
-import ml.sky233.suiteki.GraphActivity;
 import ml.sky233.suiteki.TipsActivity;
 import ml.sky233.suiteki.adapter.AppAdapter;
+import ml.sky233.suiteki.adapter.DeviceAdapter;
 import ml.sky233.suiteki.bean.AppObject;
 import ml.sky233.suiteki.callback.StatusCallback;
 import ml.sky233.suiteki.databinding.FragmentDeviceBinding;
 import ml.sky233.suiteki.service.ble.BleService;
 import ml.sky233.suiteki.service.ble.HuamiService;
+import ml.sky233.suiteki.widget.SuitekiCardButton;
 
 import static ml.sky233.suiteki.MainApplication.TAG;
 import static ml.sky233.suiteki.MainApplication.devicesList;
-import static ml.sky233.suiteki.MainApplication.mService;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -41,7 +46,7 @@ import java.util.Objects;
 public class DeviceFragment extends Fragment implements StatusCallback {
 
     private FragmentDeviceBinding binding;
-
+    @SuppressLint("InflateParams")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DeviceViewModel dashboardViewModel =
@@ -51,8 +56,22 @@ public class DeviceFragment extends Fragment implements StatusCallback {
         View root = binding.getRoot();
 
         binding.deviceChange.setOnClickListener((v) -> {
-            getActivity().startActivity(new Intent(getActivity(), DeviceActivity.class));
-            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+            final View view = getLayoutInflater().inflate(R.layout.dialog_device, null);
+            final RecyclerView rv = view.findViewById(R.id.recycler);
+
+            rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+            DeviceAdapter adapter = new DeviceAdapter(getContext(), MainApplication.devicesList);
+//            adapter.setOnItemClickListener((v, i) -> {
+//                MainApplication.devicesList.setDeviceInfo(i);
+////                new Handler().postDelayed(this::setRecycler, 120);
+//            });
+//            adapter.setOnItemLongClickListener((v, i) -> {
+////                loginDialog(devicesList.getDeviceInfo(i));
+//            });
+            rv.setAdapter(adapter);
+            bottomSheetDialog.setContentView(view);
+            bottomSheetDialog.show();
         });
         ArrayList<AppObject> arrayList = new ArrayList<>();
         arrayList.add(new AppObject("自定义安装", R.drawable.ic_app_install));

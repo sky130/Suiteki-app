@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="@null"
     tools:context=".ui.device.DeviceFragment">
-
     <TextView
         android:id="@+id/title_device"
         style="@style/Theme.Suiteki.Title"
         android:text="@string/title_device"
-        android:textColor="@color/pink"
+        android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +29,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/pink_3"
+            android:backgroundTint="@color/blue_3"
             app:cardCornerRadius="25dp"
             app:cardElevation="0dp">
 
@@ -46,7 +45,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="小米手环7"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/blue"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:text="F5:4D:31:35:9B:57"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -77,11 +76,11 @@
                     android:src="@drawable/ic_status_ble_connecting"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/pink" />
+                    app:tint="@color/blue" />
 
                 <ml.sky233.suiteki.widget.SuitekiCardButton
                     android:id="@+id/device_change"
-                    style="@style/Theme.Suiteki.CardButton.Pink"
+                    style="@style/Theme.Suiteki.CardButton"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
