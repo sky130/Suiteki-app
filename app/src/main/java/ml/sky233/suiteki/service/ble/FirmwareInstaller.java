@@ -160,6 +160,7 @@ public class FirmwareInstaller {
             byte[] value = intent.getByteArrayExtra("value");
             switch (BytesUtils.bytesToHexStr(value)) {
                 case "10D001050020"://D0
+                case "10D00105002001"://D0
                 case "10D10100"://D1
                 case "10D2010000000000000000"://D2
                     doPerform();
