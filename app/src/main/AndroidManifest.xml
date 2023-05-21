@@ -40,11 +40,17 @@
         android:theme="@style/Theme.Suiteki"
         tools:targetApi="31">
         <activity
+            android:name=".ui.WelcomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.WebLoginActivity"
             android:exported="false" />
 
         <service android:name=".service.ble.BleService" />

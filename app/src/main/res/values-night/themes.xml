@@ -35,6 +35,8 @@
 
     </style>
 
+
+
     <style name="Theme.Suiteki.Dialog">
         <item name="android:background">@drawable/bg_dialog_night</item>
     </style>

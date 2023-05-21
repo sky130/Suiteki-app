@@ -48,11 +48,6 @@ class MainApplication : Application() {
         application = this
         context = this
         SuitekiDataGetter.init()
-//        SuitekiDataPutter(this).use {
-//            put(Device(0,"小米手环7","10:10:10:10:10:10","TEST","TEST","[]"))
-//            put(Device(0,"小米手环7","10:10:10:10:10:1C","TEST","TEST","[]"))
-//            put(Device(0,"小米手环7","10:10:10:10:10:1A","TEST","TEST","[]"))
-//        }
         CrashHandler.instance.init(this)
         startBleService()
     }

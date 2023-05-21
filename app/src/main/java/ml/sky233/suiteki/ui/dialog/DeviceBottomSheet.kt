@@ -65,6 +65,6 @@ class DeviceBottomSheet(c: Context, listener: () -> Unit) :
     }
 
     companion object {
-        const val TAG = "ModalBottomSheet"
+        const val TAG = "DeviceBottomSheet"
     }
 }

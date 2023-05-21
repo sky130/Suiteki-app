@@ -13,10 +13,17 @@ import android.provider.DocumentsContract
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import ml.sky233.suiteki.MainApplication.Companion.context
+import ml.sky233.suiteki.R
+import ml.sky233.suiteki.bean.PermissionObject
 import ml.sky233.suiteki.util.TextUtils.lookFor
 
 object PermissionUtils {
-    val MI_HEALTH_PACKAEG_NAME = "com.mi.health"
+    const val MI_HEALTH_PACKAGE_NAME = "com.mi.health"
+    val PERMISSION_LIST = ArrayList<PermissionObject>().apply {
+        add(PermissionObject(R.drawable.ic_band, "文件读写权限", "用于添加设备"))
+        add(PermissionObject(R.drawable.ic_band, "Data目录权限", "用于添加设备"))
+        add(PermissionObject(R.drawable.ic_band, "蓝牙连接权限", "用于连接设备"))
+    }
 
     fun buildUri(path: String): Uri {
         return DocumentsContract.buildDocumentUri(
@@ -104,14 +111,14 @@ object PermissionUtils {
     fun isGetAllPermission(): Boolean {
         if (!isGetWritePermission()) return false
         if (!isGetBlePermission()) return false
-        return isGetUriPermission(MI_HEALTH_PACKAEG_NAME)
+        return isGetUriPermission(MI_HEALTH_PACKAGE_NAME)
     }
 
     fun getPermissionSubTitle(): String {
         return ArrayList<String>().apply {
             if (!isGetWritePermission()) add("读写权限")
             if (!isGetBlePermission()) add("蓝牙权限")
-            if (!isGetUriPermission(MI_HEALTH_PACKAEG_NAME)) add("Data权限")
+            if (!isGetUriPermission(MI_HEALTH_PACKAGE_NAME)) add("Data权限")
         }.joinToString(separator = "|")
     }
 }
