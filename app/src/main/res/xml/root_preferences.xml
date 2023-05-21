@@ -1,0 +1,55 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="连接设置">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="set_mtu"
+            app:summary="可能在部分设备上启用失败"
+            app:title="设置高MTU" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="安装偏好">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="install_with_log"
+            app:title="安装时显示日志"
+            app:summary="有助于开发者分析问题"/>
+
+        <rikka.preference.SimpleMenuPreference
+            app:defaultValue="sf"
+            app:entries="@array/file_entries"
+            app:entryValues="@array/file_values"
+            app:iconSpaceReserved="false"
+            app:key="file_chooser"
+            app:title="文件选择器"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="其他设置">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="update_when_start"
+            app:title="启动时检查应用更新" />
+
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="update_when_start"
+            app:title="检查崩溃日志"
+            app:summary="每次应用崩溃后重启会显示日志内容"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

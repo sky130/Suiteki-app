@@ -40,28 +40,17 @@
         android:theme="@style/Theme.Suiteki"
         tools:targetApi="31">
         <activity
-            android:name=".WebActivity"
-            android:exported="false" />
+            android:name=".ui.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
         <activity
-            android:name=".AddDeviceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TipsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GraphActivity"
-            android:exported="false" />
-        <activity
-            android:name=".InstallActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DeviceActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
 
         <service android:name=".service.ble.BleService" />
 
         <activity
-            android:name=".StartPageActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashActivityTheme">
             <intent-filter>
@@ -70,9 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainTestActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
