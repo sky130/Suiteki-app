@@ -12,4 +12,27 @@
     <string name="title_graph_loading">加载中</string>
     <string name="title_app_help">应用帮助</string>
     <string name="title_add_device">添加设备</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="check_log">查看日志</string>
+    <string name="join_group">进群交流</string>
+    <string name="app_settings">应用设置</string>
+    <string name="check_update">检查更新</string>
+    <string name="app_about">关于应用</string>
+    <string name="dev_install">卸载测试</string>
 </resources>
