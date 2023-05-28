@@ -12,7 +12,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import ml.sky233.suiteki.util.startActivity
+import androidx.fragment.app.FragmentManager
+import ml.sky233.suiteki.util.ActivityUtils.startActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import ml.sky233.SuitekiObject
@@ -29,14 +30,13 @@ import kotlin.concurrent.thread
 
 
 @Suppress("UNCHECKED_CAST")
-class ZeppAddDeviceBottomSheet() :
+class ZeppLoginBottomSheet(val supportFragmentManager: FragmentManager) :
     BottomSheetDialogFragment() {
     private lateinit var password: EditText
     private lateinit var username: EditText
     private lateinit var checkBox: CheckBox
     private lateinit var button: MaterialButton
     private lateinit var button_mi: MaterialButton
-
 
 
     private var handler: Handler = object : Handler(Looper.getMainLooper()) {
@@ -51,28 +51,36 @@ class ZeppAddDeviceBottomSheet() :
 
     override fun onResume() {
         super.onResume()
-        if(suiteki.isUserEmpty){
+        if (suiteki.isUserEmpty) {
             button_mi.text = "正在登录中"
             thread {
                 suiteki.loginHuami()
                 if (suiteki.resultCode.equals("200")) {
                     suiteki.getHuamiToken()
-                    val list: ArrayList<SuitekiObject> =
-                        suiteki.resultData as ArrayList<SuitekiObject>
-                    SuitekiDataPutter(requireContext()).use {
-                        for (obj in list) {
-                            put(Device(0,SuitekiUtils.getModelName(obj.deviceName), obj.mac, obj.authKey, "", "[]"))
-                        }
-                    }
-                    if (list.size > 0){
-                        handler.sendMessage(MsgUtils.build("添加成功",0))
-                        dismiss()
-                    }
-                    else
-                        handler.sendMessage(MsgUtils.build("添加失败,账号下没有设备,请检查账号登录方式",1))
-                } else {
-                    handler.sendMessage(MsgUtils.build("登录失败,检查账号或密码是否正确",2))
+                    this@ZeppLoginBottomSheet.dismiss()
+                    AddDeviceBottomSheet(supportFragmentManager).show(
+                        supportFragmentManager,
+                        AddDeviceBottomSheet.TAG
+                    )
                 }
+//                if (suiteki.resultCode.equals("200")) {
+//                    suiteki.getHuamiToken()
+//                    val list: ArrayList<SuitekiObject> =
+//                        suiteki.resultData as ArrayList<SuitekiObject>
+//                    SuitekiDataPutter(requireContext()).use {
+//                        for (obj in list) {
+//                            put(Device(0,SuitekiUtils.getModelName(obj.deviceName), obj.mac, obj.authKey, "", "[]"))
+//                        }
+//                    }
+//                    if (list.size > 0){
+//                        handler.sendMessage(MsgUtils.build("添加成功",0))
+//                        dismiss()
+//                    }
+//                    else
+//                        handler.sendMessage(MsgUtils.build("添加失败,账号下没有设备,请检查账号登录方式",1))
+//                } else {
+//                    handler.sendMessage(MsgUtils.build("登录失败,检查账号或密码是否正确",2))
+//                }
                 suiteki.setCode("")
             }
         }
@@ -84,7 +92,7 @@ class ZeppAddDeviceBottomSheet() :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.dialog_zepp_add_device, container, false)
+        val view = inflater.inflate(R.layout.dialog_zepp_login, container, false)
         password = view.findViewById(R.id.login_editText_password)
         username = view.findViewById(R.id.login_editText_mail)
         checkBox = view.findViewById(R.id.login_checkBox)
@@ -93,7 +101,8 @@ class ZeppAddDeviceBottomSheet() :
         button_mi.setOnClickListener {
             activity?.startActivity<WebLoginActivity>()
         }
-        button.setOnClickListener {it as Button
+        button.setOnClickListener {
+            it as Button
             it.isEnabled = false
             it.text = "正在登录中"
             thread {
@@ -107,17 +116,30 @@ class ZeppAddDeviceBottomSheet() :
                         suiteki.resultData as ArrayList<SuitekiObject>
                     SuitekiDataPutter(requireContext()).use {
                         for (obj in list) {
-                            put(Device(0, SuitekiUtils.getModelName(obj.deviceName), obj.mac, obj.authKey, "", "[]"))
+                            put(
+                                Device(
+                                    0,
+                                    SuitekiUtils.getModelName(obj.deviceName),
+                                    obj.mac,
+                                    obj.authKey,
+                                    "",
+                                    "[]"
+                                )
+                            )
                         }
                     }
-                    if (list.size > 0){
-                        handler.sendMessage(MsgUtils.build("添加成功",0))
+                    if (list.size > 0) {
+                        handler.sendMessage(MsgUtils.build("添加成功", 0))
                         dismiss()
-                    }
-                    else
-                        handler.sendMessage(MsgUtils.build("添加失败,账号下没有设备,请检查账号登录方式",1))
+                    } else
+                        handler.sendMessage(
+                            MsgUtils.build(
+                                "添加失败,账号下没有设备,请检查账号登录方式",
+                                1
+                            )
+                        )
                 } else {
-                    handler.sendMessage(MsgUtils.build("登录失败,检查账号或密码是否正确",2))
+                    handler.sendMessage(MsgUtils.build("登录失败,检查账号或密码是否正确", 2))
                 }
             }
         }

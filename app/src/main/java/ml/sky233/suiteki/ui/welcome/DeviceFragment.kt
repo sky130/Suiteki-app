@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ml.sky233.choseki.adapter.AppAdapter
-import ml.sky233.suiteki.R
 import ml.sky233.suiteki.adapter.RecyclerExtras
 import ml.sky233.suiteki.bean.PermissionObject
-import ml.sky233.suiteki.callback.GetDeviceCallback
 import ml.sky233.suiteki.databinding.FragmentWelcomeDeviceBinding
-import ml.sky233.suiteki.databinding.FragmentWelcomeMainBinding
 import ml.sky233.suiteki.ui.dialog.CustomAddDeviceBottomSheet
-import ml.sky233.suiteki.ui.dialog.ZeppAddDeviceBottomSheet
-import ml.sky233.suiteki.util.TextUtils.toast
+import ml.sky233.suiteki.ui.dialog.ZeppLoginBottomSheet
 
 
 class DeviceFragment(list: ArrayList<PermissionObject>,fm: FragmentManager) : Fragment() {
@@ -38,7 +34,7 @@ class DeviceFragment(list: ArrayList<PermissionObject>,fm: FragmentManager) : Fr
                 override fun onItemClick(view: View?, position: Int) {
                     when (position){
                         1 ->{
-                            ZeppAddDeviceBottomSheet().show(supportFragmentManager,ZeppAddDeviceBottomSheet.TAG)
+                            ZeppLoginBottomSheet(supportFragmentManager).show(supportFragmentManager,ZeppLoginBottomSheet.TAG)
                         }
                         2 ->{
                             CustomAddDeviceBottomSheet().show(supportFragmentManager,CustomAddDeviceBottomSheet.TAG)

@@ -6,18 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import ml.sky233.suiteki.adapter.AddDeviceAdapter
 import ml.sky233.choseki.adapter.DeviceAdapter
+import ml.sky233.suiteki.MainApplication
 import ml.sky233.suiteki.R
 import ml.sky233.suiteki.adapter.RecyclerExtras.OnItemClickListener
 import ml.sky233.suiteki.util.SettingUtils
 
-class DeviceBottomSheet(val listener: () -> Unit) :
+class AddDeviceBottomSheet(
+    private val supportFragmentManager: FragmentManager,
+) :
     BottomSheetDialogFragment() {
-    lateinit var adapter: DeviceAdapter
-    private lateinit var recycler: RecyclerView
+    lateinit var adapter: AddDeviceAdapter
+    lateinit var recycler: RecyclerView
 
 
     override fun onCreateView(
@@ -25,26 +30,14 @@ class DeviceBottomSheet(val listener: () -> Unit) :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.dialog_device, container, false)
+        val view = inflater.inflate(R.layout.dialog_add_device, container, false)
         recycler = view.findViewById(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(context)
-        adapter = DeviceAdapter(requireContext()).apply {
-            setOnItemClickListener(object : OnItemClickListener {
-                override fun onItemClick(view: View?, position: Int) {
-                    setSwitch(position)
-                }
-            })
-        }
+
+        adapter = AddDeviceAdapter(requireContext(), MainApplication.suiteki, supportFragmentManager)
         recycler.adapter = adapter
         return view
     }
-
-
-    override fun onDismiss(dialog: DialogInterface) {
-        listener()
-        super.onDismiss(dialog)
-    }
-
 
 
     fun setSwitch(position: Int) {
@@ -63,6 +56,6 @@ class DeviceBottomSheet(val listener: () -> Unit) :
     }
 
     companion object {
-        const val TAG = "DeviceBottomSheet"
+        const val TAG = "AddDeviceBottomSheet"
     }
 }
