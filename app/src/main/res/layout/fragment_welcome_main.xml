@@ -11,8 +11,9 @@
         style="@style/Theme.Suiteki.ViewPager_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:text="欢迎来到\nSuiteki"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/subText"
         app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -23,5 +24,15 @@
         android:src="@drawable/ic_app_icon"
         style="@style/Theme.Suiteki.ViewPager_Image"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/subText"
+        android:textSize="18sp"
+        style="@style/Theme.Suiteki.ViewPager_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一款华米穿戴设备工具应用"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
