@@ -36,13 +36,12 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.preference:preference:1.2.0'
     configurations {
-        all {
+        configureEach {
             exclude group: 'androidx.appcompat', module: 'appcompat'
         }
     }
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -53,7 +52,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'com.github.st235:expandablebottombar:1.5.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation "dev.rikka.rikkax.material:material-preference:2.0.0"
