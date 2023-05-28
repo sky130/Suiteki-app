@@ -15,9 +15,9 @@ import ml.sky233.suiteki.ui.dialog.DeviceBottomSheet
 import ml.sky233.suiteki.util.PermissionUtils
 import ml.sky233.suiteki.util.SettingUtils
 import ml.sky233.suiteki.util.TextUtils.toast
-import ml.sky233.suiteki.util.barTextToBlack
-import ml.sky233.suiteki.util.startActivity
-import ml.sky233.suiteki.util.startFor
+import ml.sky233.suiteki.util.ActivityUtils.startActivity
+import ml.sky233.suiteki.util.ActivityUtils.barTextToBlack
+import ml.sky233.suiteki.util.ActivityUtils.startFor
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -34,21 +34,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         binding.yBtn.setOnClickListener {
             PermissionUtils.apply {
-                startFor(MI_HEALTH_PACKAGE_NAME, 0)
-                requestWritePermissions(this@MainActivity, 1)
                 requestBlePermissions(this@MainActivity, 2)
+                requestWritePermissions(this@MainActivity, 1)
+                startFor(MI_HEALTH_PACKAGE_NAME, 0)
             }
         }
         binding.deviceChange.setOnClickListener { _ ->
-            val sheet = DeviceBottomSheet(this@MainActivity) { getDevice() }
+            val sheet = DeviceBottomSheet { getDevice() }
             sheet.show(supportFragmentManager, DeviceBottomSheet.TAG)
-        }
-
-        if (!PermissionUtils.isGetAllPermission()) {
-            Log.d("Tag", PermissionUtils.isGetAllPermission().toString())
-            binding.cardView.visibility = View.VISIBLE
-            binding.titleCard.text = "权限未获取"
-            binding.subTextCard.text = PermissionUtils.getPermissionSubTitle()
         }
     }
 
@@ -81,14 +74,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_settings -> startActivity<SettingsActivity>()
-//
-//            R.id.join_group -> DialogBuilder.joinGroup(this@MainActivity)
-//            R.id.check_update -> {
-//                thread.initActivity(this@MainActivity)
-//                Thread(thread.updateApp).start()
-//            }
-//
-//            R.id.app_about -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
         }
         return true
     }
@@ -97,6 +82,10 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         if (PermissionUtils.isGetAllPermission()) {
             binding.cardView.visibility = View.GONE
+        }else{
+            binding.cardView.visibility = View.VISIBLE
+            binding.titleCard.text = "权限未获取"
+            binding.subTextCard.text = PermissionUtils.getPermissionSubTitle()
         }
         getDevice()
     }

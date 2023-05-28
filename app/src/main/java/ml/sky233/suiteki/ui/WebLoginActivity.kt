@@ -15,7 +15,7 @@ import ml.sky233.suiteki.R
 import ml.sky233.suiteki.databinding.ActivityWebLoginBinding
 import ml.sky233.suiteki.util.TextUtils.lookFor
 import ml.sky233.suiteki.util.UrlUtils.getParameter
-import ml.sky233.suiteki.util.barTextToBlack
+import ml.sky233.suiteki.util.ActivityUtils.barTextToBlack
 
 class WebLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebLoginBinding

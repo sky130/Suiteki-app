@@ -14,14 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceRecyclerViewAccessibilityDelegate
-import androidx.preference.PreferenceScreen
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import ml.sky233.suiteki.R
 import ml.sky233.suiteki.databinding.ActivitySettingsBinding
-import ml.sky233.suiteki.util.barTextToBlack
+import ml.sky233.suiteki.util.ActivityUtils.barTextToBlack
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding

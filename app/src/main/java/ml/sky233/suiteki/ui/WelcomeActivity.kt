@@ -1,6 +1,8 @@
 package ml.sky233.suiteki.ui
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -8,16 +10,17 @@ import androidx.fragment.app.FragmentPagerAdapter
 import ml.sky233.suiteki.R
 import ml.sky233.suiteki.bean.PermissionObject
 import ml.sky233.suiteki.databinding.ActivityWelcomeBinding
-import ml.sky233.suiteki.ui.dialog.ZeppAddDeviceBottomSheet
 import ml.sky233.suiteki.ui.welcome.DeviceFragment
 import ml.sky233.suiteki.ui.welcome.MainFragment
 import ml.sky233.suiteki.ui.welcome.PermissionFragment
 import ml.sky233.suiteki.ui.welcome.ReadFragment
+import ml.sky233.suiteki.ui.welcome.TipsFragment
 import ml.sky233.suiteki.util.SettingUtils
-import ml.sky233.suiteki.util.barTextToBlack
-import ml.sky233.suiteki.util.startActivity
+import ml.sky233.suiteki.util.ActivityUtils.startActivity
+import ml.sky233.suiteki.util.ActivityUtils.barTextToBlack
 
 class WelcomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityWelcomeBinding
     val fragmentList: List<Fragment> = ArrayList<Fragment>().apply {
         add(MainFragment())
@@ -33,6 +36,7 @@ class WelcomeActivity : AppCompatActivity() {
                 supportFragmentManager
             )
         )
+        add(TipsFragment())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,14 +46,23 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.viewPage.adapter = AppFragmentPageAdapter(supportFragmentManager, fragmentList)
         binding.next.setOnClickListener {
-            if (binding.viewPage.currentItem + 1 == fragmentList.size){
+            it as Button
+            if (binding.viewPage.currentItem + 1 == fragmentList.size) {
                 SettingUtils.setBoolean("first_start", true)
                 startActivity<MainActivity>()
                 finish()
             }
+            if (binding.viewPage.currentItem + 2 == fragmentList.size) {
+                it.text = "完成"
+            }
+            binding.back.visibility = View.VISIBLE
             binding.viewPage.setCurrentItem(binding.viewPage.currentItem + 1, true)
         }
         binding.back.setOnClickListener {
+            if (binding.viewPage.currentItem - 1 == 0) {
+                it.visibility = View.INVISIBLE
+            }
+            binding.next.text = "继续"
             binding.viewPage.setCurrentItem(binding.viewPage.currentItem - 1, true)
         }
     }

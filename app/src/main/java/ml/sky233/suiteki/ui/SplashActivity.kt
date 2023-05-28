@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ml.sky233.suiteki.R
 import ml.sky233.suiteki.util.SettingUtils
-import ml.sky233.suiteki.util.startActivity
+import ml.sky233.suiteki.util.ActivityUtils.startActivity
+import ml.sky233.suiteki.util.ActivityUtils.barTextToBlack
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
