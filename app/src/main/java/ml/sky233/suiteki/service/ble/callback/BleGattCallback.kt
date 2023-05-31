@@ -17,7 +17,7 @@ import ml.sky233.suiteki.service.ble.BleActions
 import ml.sky233.suiteki.service.ble.BleDeviceInfo
 import ml.sky233.suiteki.service.ble.BleService
 import ml.sky233.suiteki.service.ble.HuamiService
-import ml.sky233.suiteki.util.ArrayUtils
+import org.apache.commons.lang3.ArrayUtils
 import ml.sky233.suiteki.util.BytesUtils
 import ml.sky233.suiteki.util.Crypto.CryptoUtils
 import ml.sky233.suiteki.util.Crypto.ECDH_B163

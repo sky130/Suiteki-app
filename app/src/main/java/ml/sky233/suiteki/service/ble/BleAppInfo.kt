@@ -1,7 +1,7 @@
 package ml.sky233.suiteki.service.ble
 
 import ml.sky233.suiteki.service.ble.callback.BleGattCallback
-import ml.sky233.suiteki.util.ArrayUtils
+import org.apache.commons.lang3.ArrayUtils
 
 class BleAppInfo(var bleGattCallback: BleGattCallback) {
     var app_list: ArrayList<String>? = null
